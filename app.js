@@ -24,7 +24,7 @@ app.get('/orders', (req, res) => {
 });
 
 app.get('/orderitems', (req, res) => {
-    res.render('order-items');
+    res.render('orderitems');
 });
 
 app.get('/inventory', (req, res) => {
@@ -40,7 +40,7 @@ app.get('/purchases', (req, res) => {
 });
 
 app.get('/purchaseitems', (req, res) => {
-    res.render('purchase-items');
+    res.render('purchaseitems');
 });
 
 app.listen(PORT, () => {
