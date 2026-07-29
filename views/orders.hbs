@@ -67,6 +67,110 @@
     </section>
 
     <section> 
-        <h2> Add New Order</h2>
-        
+        <h2>Add New Order</h2>
+
+         <form>
+            <label for="add_order_customer_id">Customer</label>
+            <select id="add_order_customer_id" name="customer_id" required>
+                <option value="">Select a customer</option>
+                <option value="1">1 - Maya Torres</option>
+                <option value="2">2 - Devon Park</option>
+                <option value="3">3 - Lena Fischer</option>
+            </select>
+
+            <label for="add_order_date">Order Date</label>
+            <input type="date" id="add_order_date" name="order_date" required>
+
+            <label for="add_payment_method">Payment Method</label>
+            <select id="add_payment_method" name="payment_method">
+                <option value="">Select payment method</option>
+                <option value="credit">credit</option>
+                <option value="debit">debit</option>
+                <option value="cash">cash</option>
+            </select>
+
+            <label for="add_payment_last_four">Payment Last Four</label>
+            <input type="text" id="add_payment_last_four" name="payment_last_four" maxlength="4">
+
+            <label for="add_order_complete">Order Complete</label>
+            <select id="add_order_complete" name="order_complete" required>
+                <option value="0">0 - No</option>
+                <option value="1">1 - Yes</option>
+            </select>
+
+            <label for="add_pickup_or_ship">Pickup or Ship</label>
+            <select id="add_pickup_or_ship" name="pickup_or_ship" required>
+                <option value="pickup">pickup</option>
+                <option value="ship">ship</option>
+            </select>
+
+            <button type="submit">Add Order</button>
+        </form>
     </section>
+
+    <section>
+        <h2>Update Existing Order</h2>
+
+        <form>
+            <label for="update_order_id">Order</label>
+            <select id="update_order_id" name="order_id" required>
+                <option value="">Select an order</option>
+                <option value="3001">3001 - Maya Torres - 2026-07-03</option>
+                <option value="3002">3002 - Maya Torres - 2026-07-10</option>
+                <option value="3003">3003 - Devon Park - 2026-07-12</option>
+                <option value="3004">3004 - Lena Fischer - 2026-07-15</option>
+            </select>
+
+            <label for="update_order_customer_id">Customer</label>
+            <select id="update_order_customer_id" name="customer_id">
+                <option value="1">1 - Maya Torres</option>
+                <option value="2">2 - Devon Park</option>
+                <option value="3">3 - Lena Fischer</option>
+            </select>
+
+            <label for="update_order_date">Order Date</label>
+            <input type="date" id="update_order_date" name="order_date">
+
+            <label for="update_payment_method">Payment Method</label>
+            <select id="update_payment_method" name="payment_method">
+                <option value="credit">credit</option>
+                <option value="debit">debit</option>
+                <option value="cash">cash</option>
+            </select>
+
+            <label for="update_payment_last_four">Payment Last Four</label>
+            <input type="text" id="update_payment_last_four" name="payment_last_four" maxlength="4">
+
+            <label for="update_order_complete">Order Complete</label>
+            <select id="update_order_complete" name="order_complete">
+                <option value="0">0 - No</option>
+                <option value="1">1 - Yes</option>
+            </select>
+
+            <label for="update_pickup_or_ship">Pickup or Ship</label>
+            <select id="update_pickup_or_ship" name="pickup_or_ship">
+                <option value="pickup">pickup</option>
+                <option value="ship">ship</option>
+            </select>
+
+            <button type="submit">Update Order</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Delete Order</h2>
+
+        <form>
+            <label for="delete_order_id">Order</label>
+            <select id="delete_order_id" name="order_id" required>
+                <option value="">Select an order</option>
+                <option value="3001">3001 - Maya Torres</option>
+                <option value="3002">3002 - Maya Torres</option>
+                <option value="3003">3003 - Devon Park</option>
+                <option value="3004">3004 - Lena Fischer</option>
+            </select>
+
+            <button type="submit" class="delete-button">Delete Order</button>
+        </form>
+    </section>
+</main>
