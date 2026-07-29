@@ -59,3 +59,92 @@
             </tbody>
         </table>
     </section>
+
+    <section>
+        <h2>Add New Customer</h2>
+
+        <form> 
+            <label> for="add_customer_first_name>First Name</label>
+            <input type="text" id="add_customer_first_name" name="customer_first_name" required>
+
+            <label for="add_customer_last_name">Last Name</label>
+            <input type="text" id="add_customer_last_name" name="customer_last_name" required>
+
+            <label for="add_customer_street">Street</label>
+            <input type="text" id="add_customer_street" name="customer_street">
+
+            <label for="add_customer_city">City</label>
+            <input type="text" id="add_customer_city" name="customer_city">
+
+            <label for="add_customer_state">State</label>
+            <input type="text" id="add_customer_state" name="customer_state" maxlength="2">
+
+            <label for="add_customer_zip">ZIP</label>
+            <input type="text" id="add_customer_zip" name="customer_zip">
+
+            <label for="add_customer_phone">Phone</label>
+            <input type="text" id="add_customer_phone" name="customer_phone">
+
+            <label for="add_customer_email">Email</label>
+            <input type="email" id="add_customer_email" name="customer_email">
+
+            <button type="submit">Add Customer</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Update Existing Customer</h2>
+
+        <form>
+            <label for="update_customer_id">Customer</label>
+            <select id="update_customer_id" name="customer_id" required>
+                <option value="">Select a customer</option>
+                <option value="1">1 - Maya Torres</option>
+                <option value="2">2 - Devon Park</option>
+                <option value="3">3 - Lena Fischer</option>
+            </select>
+
+            <label for="update_customer_first_name">First Name</label>
+            <input type="text" id="update_customer_first_name" name="customer_first_name">
+
+            <label for="update_customer_last_name">Last Name</label>
+            <input type="text" id="update_customer_last_name" name="customer_last_name">
+
+            <label for="update_customer_street">Street</label>
+            <input type="text" id="update_customer_street" name="customer_street">
+
+            <label for="update_customer_city">City</label>
+            <input type="text" id="update_customer_city" name="customer_city">
+
+            <label for="update_customer_state">State</label>
+            <input type="text" id="update_customer_state" name="customer_state" maxlength="2">
+
+            <label for="update_customer_zip">ZIP</label>
+            <input type="text" id="update_customer_zip" name="customer_zip">
+
+            <label for="update_customer_phone">Phone</label>
+            <input type="text" id="update_customer_phone" name="customer_phone">
+
+            <label for="update_customer_email">Email</label>
+            <input type="email" id="update_customer_email" name="customer_email">
+
+            <button type="submit">Update Customer</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Delete Customer</h2>
+
+        <form>
+            <label for="delete_customer_id">Customer</label>
+            <select id="delete_customer_id" name="customer_id" required>
+                <option value="">Select a customer</option>
+                <option value="1">1 - Maya Torres</option>
+                <option value="2">2 - Devon Park</option>
+                <option value="3">3 - Lena Fischer</option>
+            </select>
+
+            <button type="submit" class="delete-button">Delete Customer</button>
+        </form>
+    </section>
+</main>
