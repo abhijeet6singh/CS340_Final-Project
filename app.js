@@ -19,7 +19,7 @@ app.get('/customers', (req, res) => {
     res.render('customers');
 });
 
-// remaining six routes here
+// add remaining routes here
 
 app.listen(PORT, () => {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.');
