@@ -1,0 +1,117 @@
+<h1>Orders</h1>
+
+<h2>Browse orders</h2>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Order date</th>
+        <th>Payment method</th>
+        <th>Last four</th>
+        <th>Complete</th>
+        <th>Pickup or ship</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>3001</td>
+        <td>Maya Torres</td>
+        <td>2026-07-03</td>
+        <td>credit</td>
+        <td>4821</td>
+        <td>Yes</td>
+        <td>pickup</td>
+        <td><a href="/orders?delete_order_id=3001"><button>Delete</button></a></td>
+    </tr>
+    <tr>
+        <td>3002</td>
+        <td>Maya Torres</td>
+        <td>2026-07-10</td>
+        <td>debit</td>
+        <td>7754</td>
+        <td>Yes</td>
+        <td>ship</td>
+        <td><a href="/orders?delete_order_id=3002"><button>Delete</button></a></td>
+    </tr>
+    <tr>
+        <td>3003</td>
+        <td>Devon Park</td>
+        <td>2026-07-12</td>
+        <td>credit</td>
+        <td>1096</td>
+        <td>No</td>
+        <td>ship</td>
+        <td><a href="/orders?delete_order_id=3003"><button>Delete</button></a></td>
+    </tr>
+    <tr>
+        <td>3004</td>
+        <td>Lena Fischer</td>
+        <td>2026-07-15</td>
+        <td>cash</td>
+        <td></td>
+        <td>Yes</td>
+        <td>pickup</td>
+        <td><a href="/orders?delete_order_id=3004"><button>Delete</button></a></td>
+    </tr>
+</table>
+
+<h2>Create an order</h2>
+<form action="/orders" method="POST">
+    <label for="customer_id">Customer:</label>
+    <select name="customer_id" id="customer_id">
+        <option value="1">Maya Torres</option>
+        <option value="2">Devon Park</option>
+        <option value="3">Lena Fischer</option>
+    </select>
+
+    <label for="order_date">Order date:</label>
+    <input type="date" name="order_date" id="order_date">
+
+    <label for="payment_method">Payment method:</label>
+    <select name="payment_method" id="payment_method">
+        <option value="credit">Credit</option>
+        <option value="debit">Debit</option>
+        <option value="cash">Cash</option>
+    </select>
+
+    <label for="payment_last_four">Last four:</label>
+    <input type="text" name="payment_last_four" id="payment_last_four" maxlength="4">
+
+    <label for="order_complete">Complete:</label>
+    <select name="order_complete" id="order_complete">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+    </select>
+
+    <label for="pickup_or_ship">Pickup or ship:</label>
+    <select name="pickup_or_ship" id="pickup_or_ship">
+        <option value="pickup">Pickup</option>
+        <option value="ship">Ship</option>
+    </select>
+
+    <input type="submit" value="Submit">
+</form>
+<h2>Update an order</h2>
+<form action="/orders" method="POST">
+    <label for="update_order_id">Order to update:</label>
+    <select name="order_id" id="update_order_id">
+        <option value="">Select an order</option>
+        <option value="3001">#3001 &middot; Maya Torres &middot; 2026-07-03</option>
+        <option value="3002">#3002 &middot; Maya Torres &middot; 2026-07-10</option>
+        <option value="3003">#3003 &middot; Devon Park &middot; 2026-07-12</option>
+        <option value="3004">#3004 &middot; Lena Fischer &middot; 2026-07-15</option>
+    </select>
+
+    <label for="update_order_complete">Complete:</label>
+    <select name="order_complete" id="update_order_complete">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+    </select>
+
+    <label for="update_pickup_or_ship">Pickup or ship:</label>
+    <select name="pickup_or_ship" id="update_pickup_or_ship">
+        <option value="pickup">Pickup</option>
+        <option value="ship">Ship</option>
+    </select>
+
+    <input type="submit" value="Submit">
+</form>
