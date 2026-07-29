@@ -1,0 +1,119 @@
+<h1>Customers</h1>
+
+<h2>Browse customers</h2>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>State</th>
+        <th>ZIP</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Maya</td>
+        <td>Torres</td>
+        <td>412 Alder St</td>
+        <td>Corvallis</td>
+        <td>OR</td>
+        <td>97330</td>
+        <td>541-555-0142</td>
+        <td>maya.t@example.com</td>
+        <td><a href="/customers?delete_customer_id=1"><button>Delete</button></a></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Devon</td>
+        <td>Park</td>
+        <td>88 NW Harrison Blvd</td>
+        <td>Corvallis</td>
+        <td>OR</td>
+        <td>97330</td>
+        <td>541-555-0177</td>
+        <td>dpark@example.com</td>
+        <td><a href="/customers?delete_customer_id=2"><button>Delete</button></a></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Lena</td>
+        <td>Fischer</td>
+        <td>1520 SE Division St</td>
+        <td>Portland</td>
+        <td>OR</td>
+        <td>97202</td>
+        <td>503-555-0110</td>
+        <td>lenaf@example.com</td>
+        <td><a href="/customers?delete_customer_id=3"><button>Delete</button></a></td>
+    </tr>
+</table>
+
+<h2>Create a customer</h2>
+<form action="/customers" method="POST">
+    <label for="customer_first_name">First name:</label>
+    <input type="text" name="customer_first_name" id="customer_first_name">
+
+    <label for="customer_last_name">Last name:</label>
+    <input type="text" name="customer_last_name" id="customer_last_name">
+
+    <label for="customer_street">Street:</label>
+    <input type="text" name="customer_street" id="customer_street">
+
+    <label for="customer_city">City:</label>
+    <input type="text" name="customer_city" id="customer_city">
+
+    <label for="customer_state">State:</label>
+    <input type="text" name="customer_state" id="customer_state" maxlength="2">
+
+    <label for="customer_zip">ZIP:</label>
+    <input type="text" name="customer_zip" id="customer_zip">
+
+    <label for="customer_phone">Phone:</label>
+    <input type="text" name="customer_phone" id="customer_phone">
+
+    <label for="customer_email">Email:</label>
+    <input type="email" name="customer_email" id="customer_email">
+
+    <input type="submit" value="Submit">
+</form>
+
+<h2>Update a customer</h2>
+<form action="/customers" method="POST">
+    <label for="update_customer_id">Customer to update:</label>
+    <select name="customer_id" id="update_customer_id">
+        <option value="">Select a customer</option>
+        <option value="1">Maya Torres</option>
+        <option value="2">Devon Park</option>
+        <option value="3">Lena Fischer</option>
+    </select>
+
+    <label for="update_customer_first_name">First name:</label>
+    <input type="text" name="customer_first_name" id="update_customer_first_name">
+
+    <label for="update_customer_last_name">Last name:</label>
+    <input type="text" name="customer_last_name" id="update_customer_last_name">
+
+    <label for="update_customer_street">Street:</label>
+    <input type="text" name="customer_street" id="update_customer_street">
+
+    <label for="update_customer_city">City:</label>
+    <input type="text" name="customer_city" id="update_customer_city">
+
+    <label for="update_customer_state">State:</label>
+    <input type="text" name="customer_state" id="update_customer_state" maxlength="2">
+
+    <label for="update_customer_zip">ZIP:</label>
+    <input type="text" name="customer_zip" id="update_customer_zip">
+
+    <label for="update_customer_phone">Phone:</label>
+    <input type="text" name="customer_phone" id="update_customer_phone">
+
+    <label for="update_customer_email">Email:</label>
+    <input type="email" name="customer_email" id="update_customer_email">
+
+    <input type="submit" value="Submit">
+</form>
