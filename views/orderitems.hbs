@@ -1,0 +1,153 @@
+<h1>Order Items</h1>
+
+<h2>Browse order items</h2>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Order</th>
+        <th>Inventory item</th>
+        <th>Quantity</th>
+        <th>Discount percent</th>
+        <th>Selling price</th>
+        <th>Shipped</th>
+        <th>Shipping date</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>7001</td>
+        <td>#3001 &middot; Maya Torres &middot; 2026-07-03</td>
+        <td>JKT-204 &middot; Columbia Rain Jacket</td>
+        <td>1</td>
+        <td>0.00</td>
+        <td>89.99</td>
+        <td>N/A</td>
+        <td></td>
+        <td><a href="/orderitems?delete_order_item_id=7001"><button>Delete</button></a></td>
+    </tr>
+    <tr>
+        <td>7002</td>
+        <td>#3001 &middot; Maya Torres &middot; 2026-07-03</td>
+        <td>BNE-055 &middot; Patagonia Beanie</td>
+        <td>1</td>
+        <td>10.00</td>
+        <td>31.49</td>
+        <td>N/A</td>
+        <td></td>
+        <td><a href="/orderitems?delete_order_item_id=7002"><button>Delete</button></a></td>
+    </tr>
+    <tr>
+        <td>7003</td>
+        <td>#3002 &middot; Maya Torres &middot; 2026-07-10</td>
+        <td>HDY-118 &middot; Carhartt Hoodie</td>
+        <td>2</td>
+        <td>0.00</td>
+        <td>42.50</td>
+        <td>Yes</td>
+        <td>2026-07-11</td>
+        <td><a href="/orderitems?delete_order_item_id=7003"><button>Delete</button></a></td>
+    </tr>
+    <tr>
+        <td>7004</td>
+        <td>#3003 &middot; Devon Park &middot; 2026-07-12</td>
+        <td>JNS-310 &middot; Levi's Jeans</td>
+        <td>1</td>
+        <td>15.00</td>
+        <td>46.74</td>
+        <td>No</td>
+        <td></td>
+        <td><a href="/orderitems?delete_order_item_id=7004"><button>Delete</button></a></td>
+    </tr>
+    <tr>
+        <td>7005</td>
+        <td>#3004 &middot; Lena Fischer &middot; 2026-07-15</td>
+        <td>JKT-204 &middot; Columbia Rain Jacket</td>
+        <td>1</td>
+        <td>0.00</td>
+        <td>89.99</td>
+        <td>N/A</td>
+        <td></td>
+        <td><a href="/orderitems?delete_order_item_id=7005"><button>Delete</button></a></td>
+    </tr>
+</table>
+
+<h2>Create an order item</h2>
+<form action="/orderitems" method="POST">
+    <label for="order_id">Order:</label>
+    <select name="order_id" id="order_id">
+        <option value="3001">#3001 &middot; Maya Torres &middot; 2026-07-03</option>
+        <option value="3002">#3002 &middot; Maya Torres &middot; 2026-07-10</option>
+        <option value="3003">#3003 &middot; Devon Park &middot; 2026-07-12</option>
+        <option value="3004">#3004 &middot; Lena Fischer &middot; 2026-07-15</option>
+    </select>
+
+    <label for="inventory_id">Inventory item:</label>
+    <select name="inventory_id" id="inventory_id">
+        <option value="101">JKT-204 &middot; Columbia Rain Jacket</option>
+        <option value="102">JNS-310 &middot; Levi's Jeans</option>
+        <option value="103">HDY-118 &middot; Carhartt Hoodie</option>
+        <option value="104">BNE-055 &middot; Patagonia Beanie</option>
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity" min="1">
+
+    <label for="discount_percent">Discount percent:</label>
+    <input type="number" name="discount_percent" id="discount_percent" step="0.01" min="0">
+
+    <label for="selling_price">Selling price:</label>
+    <input type="number" name="selling_price" id="selling_price" step="0.01" min="0">
+
+    <label for="shipped">Shipped:</label>
+    <select name="shipped" id="shipped">
+        <option value="">N/A</option>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+    </select>
+
+    <label for="shipping_date">Shipping date:</label>
+    <input type="date" name="shipping_date" id="shipping_date">
+
+    <input type="submit" value="Submit">
+</form>
+
+<h2>Update an order item</h2>
+<form action="/orderitems" method="POST">
+    <label for="update_order_item_id">Order item to update:</label>
+    <select name="order_item_id" id="update_order_item_id">
+        <option value="">Select an order item</option>
+        <option value="7001">#7001 &middot; Order 3001 &middot; JKT-204</option>
+        <option value="7002">#7002 &middot; Order 3001 &middot; BNE-055</option>
+        <option value="7003">#7003 &middot; Order 3002 &middot; HDY-118</option>
+        <option value="7004">#7004 &middot; Order 3003 &middot; JNS-310</option>
+        <option value="7005">#7005 &middot; Order 3004 &middot; JKT-204</option>
+    </select>
+
+    <label for="update_inventory_id">Inventory item:</label>
+    <select name="inventory_id" id="update_inventory_id">
+        <option value="101">JKT-204 &middot; Columbia Rain Jacket</option>
+        <option value="102">JNS-310 &middot; Levi's Jeans</option>
+        <option value="103">HDY-118 &middot; Carhartt Hoodie</option>
+        <option value="104">BNE-055 &middot; Patagonia Beanie</option>
+    </select>
+
+    <label for="update_quantity">Quantity:</label>
+    <input type="number" name="quantity" id="update_quantity" min="1">
+
+    <label for="update_discount_percent">Discount percent:</label>
+    <input type="number" name="discount_percent" id="update_discount_percent" step="0.01" min="0">
+
+    <label for="update_selling_price">Selling price:</label>
+    <input type="number" name="selling_price" id="update_selling_price" step="0.01" min="0">
+
+    <label for="update_shipped">Shipped:</label>
+    <select name="shipped" id="update_shipped">
+        <option value="">N/A</option>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+    </select>
+
+    <label for="update_shipping_date">Shipping date:</label>
+    <input type="date" name="shipping_date" id="update_shipping_date">
+
+    <input type="submit" value="Submit">
+</form>
