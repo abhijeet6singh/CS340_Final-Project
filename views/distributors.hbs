@@ -1,0 +1,140 @@
+<header>
+    <h1>Distributors</h1>
+    <p>Browse, add, update, and delete distributor records.</p>
+</header>
+
+<main>
+    <section>
+        <h2>Browse Existing Distributors</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>distributor_id</th>
+                    <th>distributor_name</th>
+                    <th>distributor_street</th>
+                    <th>distributor_city</th>
+                    <th>distributor_state</th>
+                    <th>distributor_zip</th>
+                    <th>distributor_phone</th>
+                    <th>distributor_contact_person</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Cascade Apparel Supply</td>
+                    <td>900 NW Industrial Way</td>
+                    <td>Portland</td>
+                    <td>OR</td>
+                    <td>97209</td>
+                    <td>503-555-0233</td>
+                    <td>Rita Salazar</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Pacific Garment Wholesale</td>
+                    <td>4410 1st Ave S</td>
+                    <td>Seattle</td>
+                    <td>WA</td>
+                    <td>98134</td>
+                    <td>206-555-0189</td>
+                    <td>James Okafor</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Northwest Outdoor Apparel</td>
+                    <td>275 Riverfront Ave</td>
+                    <td>Eugene</td>
+                    <td>OR</td>
+                    <td>97401</td>
+                    <td>541-555-0198</td>
+                    <td>Elena Brooks</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Add New Distributor</h2>
+
+        <form>
+            <label for="add_distributor_name">Distributor Name</label>
+            <input type="text" id="add_distributor_name" name="distributor_name" required>
+
+            <label for="add_distributor_street">Street</label>
+            <input type="text" id="add_distributor_street" name="distributor_street">
+
+            <label for="add_distributor_city">City</label>
+            <input type="text" id="add_distributor_city" name="distributor_city">
+
+            <label for="add_distributor_state">State</label>
+            <input type="text" id="add_distributor_state" name="distributor_state" maxlength="2">
+
+            <label for="add_distributor_zip">ZIP</label>
+            <input type="text" id="add_distributor_zip" name="distributor_zip">
+
+            <label for="add_distributor_phone">Phone</label>
+            <input type="text" id="add_distributor_phone" name="distributor_phone">
+
+            <label for="add_distributor_contact">Contact Person</label>
+            <input type="text" id="add_distributor_contact" name="distributor_contact_person">
+
+            <button type="submit">Add Distributor</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Update Existing Distributor</h2>
+
+        <form>
+            <label for="update_distributor_id">Distributor</label>
+            <select id="update_distributor_id" name="distributor_id" required>
+                <option value="">Select a distributor</option>
+                <option value="1">1 - Cascade Apparel Supply</option>
+                <option value="2">2 - Pacific Garment Wholesale</option>
+                <option value="3">3 - Northwest Outdoor Apparel</option>
+            </select>
+
+            <label for="update_distributor_name">Distributor Name</label>
+            <input type="text" id="update_distributor_name" name="distributor_name">
+
+            <label for="update_distributor_street">Street</label>
+            <input type="text" id="update_distributor_street" name="distributor_street">
+
+            <label for="update_distributor_city">City</label>
+            <input type="text" id="update_distributor_city" name="distributor_city">
+
+            <label for="update_distributor_state">State</label>
+            <input type="text" id="update_distributor_state" name="distributor_state" maxlength="2">
+
+            <label for="update_distributor_zip">ZIP</label>
+            <input type="text" id="update_distributor_zip" name="distributor_zip">
+
+            <label for="update_distributor_phone">Phone</label>
+            <input type="text" id="update_distributor_phone" name="distributor_phone">
+
+            <label for="update_distributor_contact">Contact Person</label>
+            <input type="text" id="update_distributor_contact" name="distributor_contact_person">
+
+            <button type="submit">Update Distributor</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Delete Distributor</h2>
+
+        <form>
+            <label for="delete_distributor_id">Distributor</label>
+            <select id="delete_distributor_id" name="distributor_id" required>
+                <option value="">Select a distributor</option>
+                <option value="1">1 - Cascade Apparel Supply</option>
+                <option value="2">2 - Pacific Garment Wholesale</option>
+                <option value="3">3 - Northwest Outdoor Apparel</option>
+            </select>
+
+            <button type="submit" class="delete-button">Delete Distributor</button>
+        </form>
+    </section>
+</main>
