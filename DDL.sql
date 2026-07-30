@@ -3,9 +3,16 @@
 -- Group Number: 15
 -- Project Title: Peak Apparel Co. Inventory Management System
 
+-- This file creates the tables for the Peak Apparel Co. database.
+-- The tables are dropped first so the script can be rerun during testing.
+-- Foreign key checks are turned off temporarily because some tables depend on others.
+
 SET FOREIGN_KEY_CHECKS = 0;
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
+
+-- Drop child tables before parent tables because of foreign key relationships.
+-- This prevents errors when resetting the database.
 
 DROP TABLE IF EXISTS PurchaseItems;
 DROP TABLE IF EXISTS OrderItems;
@@ -14,6 +21,9 @@ DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Inventory;
 DROP TABLE IF EXISTS Distributors;
 DROP TABLE IF EXISTS Customers;
+
+-- Customers stores basic contact information for people who place orders.
+-- Each customer can have multiple orders, but each order belongs to one customer.
 
 CREATE TABLE Customers (
     customer_id INT AUTO_INCREMENT NOT NULL,
@@ -28,6 +38,9 @@ CREATE TABLE Customers (
     PRIMARY KEY (customer_id)
 );
 
+-- Distributors stores information about the companies that supply inventory.
+-- Distributors are connected to both Inventory and Purchases.
+
 CREATE TABLE Distributors (
     distributor_id INT AUTO_INCREMENT NOT NULL,
     distributor_name VARCHAR(100) NOT NULL,
@@ -39,6 +52,9 @@ CREATE TABLE Distributors (
     distributor_contact_person VARCHAR(100),
     PRIMARY KEY (distributor_id)
 );
+
+-- Inventory stores the clothing items sold by the store.
+-- Each inventory item has one distributor and can appear in many order or purchase line items.
 
 CREATE TABLE Inventory (
     inventory_id INT AUTO_INCREMENT NOT NULL,
@@ -54,6 +70,9 @@ CREATE TABLE Inventory (
         ON UPDATE CASCADE
 );
 
+-- Orders stores customer order information.
+-- The customer_id foreign key connects each order to the customer who placed it.
+
 CREATE TABLE Orders (
     order_id INT AUTO_INCREMENT NOT NULL,
     customer_id INT NOT NULL,
@@ -67,6 +86,9 @@ CREATE TABLE Orders (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+-- OrderItems stores the individual products included in each customer order.
+-- This table connects Orders and Inventory and resolves their many-to-many relationship.
 
 CREATE TABLE OrderItems (
     order_item_id INT AUTO_INCREMENT NOT NULL,
@@ -86,6 +108,9 @@ CREATE TABLE OrderItems (
         ON UPDATE CASCADE
 );
 
+-- Purchases stores inventory purchases made from distributors.
+-- Each purchase comes from one distributor.
+
 CREATE TABLE Purchases (
     purchase_id INT AUTO_INCREMENT NOT NULL,
     purchase_date DATE NOT NULL,
@@ -95,6 +120,9 @@ CREATE TABLE Purchases (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+-- PurchaseItems stores the individual inventory items included in each purchase.
+-- This table connects Purchases and Inventory and resolves their many-to-many relationship.
 
 CREATE TABLE PurchaseItems (
     purchase_item_id INT AUTO_INCREMENT NOT NULL,
@@ -110,6 +138,8 @@ CREATE TABLE PurchaseItems (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+-- Insert sample customer data for testing the Customers table.
 
 INSERT INTO Customers (
     customer_id,
@@ -127,6 +157,8 @@ VALUES
 (2, 'Devon', 'Park', '88 NW Harrison Blvd', 'Corvallis', 'OR', '97330', '541-555-0177', 'dpark@example.com'),
 (3, 'Lena', 'Fischer', '1520 SE Division St', 'Portland', 'OR', '97202', '503-555-0110', 'lenaf@example.com');
 
+-- Insert sample distributor data for testing distributor relationships.
+
 INSERT INTO Distributors (
     distributor_id,
     distributor_name,
@@ -141,6 +173,9 @@ VALUES
 (1, 'Cascade Apparel Supply', '900 NW Industrial Way', 'Portland', 'OR', '97209', '503-555-0233', 'Rita Salazar'),
 (2, 'Pacific Garment Wholesale', '4410 1st Ave S', 'Seattle', 'WA', '98134', '206-555-0189', 'James Okafor'),
 (3, 'Northwest Outdoor Apparel', '275 Riverfront Ave', 'Eugene', 'OR', '97401', '541-555-0198', 'Elena Brooks');
+
+-- Insert sample inventory items.
+-- Each item is linked to the distributor that supplies it.
 
 INSERT INTO Inventory (
     inventory_id,
@@ -157,6 +192,9 @@ VALUES
 (103, 'HDY-118', 'Hoodie', 'Carhartt', 1, 42.50, 20),
 (104, 'BNE-055', 'Beanie', 'Patagonia', 3, 34.99, 15);
 
+-- Insert sample customer orders.
+-- Some orders are pickup orders and some are shipping orders.
+
 INSERT INTO Orders (
     order_id,
     customer_id,
@@ -171,6 +209,9 @@ VALUES
 (3002, 1, '2026-07-10', 'debit', '7754', 1, 'ship'),
 (3003, 2, '2026-07-12', 'credit', '1096', 0, 'ship'),
 (3004, 3, '2026-07-15', 'cash', NULL, 1, 'pickup');
+
+-- Insert sample order line items.
+-- NULL shipped values are used for pickup orders where shipping does not apply.
 
 INSERT INTO OrderItems (
     order_item_id,
@@ -189,6 +230,8 @@ VALUES
 (7004, 3003, 102, 1, 15.00, 46.74, 0, NULL),
 (7005, 3004, 101, 1, 0.00, 89.99, NULL, NULL);
 
+-- Insert sample purchases made from distributors.
+
 INSERT INTO Purchases (
     purchase_id,
     purchase_date,
@@ -198,6 +241,9 @@ VALUES
 (5001, '2026-06-02', 1),
 (5002, '2026-06-15', 2),
 (5003, '2026-07-01', 3);
+
+-- Insert sample purchase line items.
+-- These records show which inventory items were bought in each purchase.
 
 INSERT INTO PurchaseItems (
     purchase_item_id,
