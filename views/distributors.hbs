@@ -13,39 +13,19 @@
         <th>Contact person</th>
         <th></th>
     </tr>
+    {{#each distributors}}
     <tr>
-        <td>1</td>
-        <td>Cascade Apparel Supply</td>
-        <td>900 NW Industrial Way</td>
-        <td>Portland</td>
-        <td>OR</td>
-        <td>97209</td>
-        <td>503-555-0233</td>
-        <td>Rita Salazar</td>
-        <td><a href="/distributors?delete_distributor_id=1"><button>Delete</button></a></td>
+        <td>{{this.distributor_id}}</td>
+        <td>{{this.distributor_name}}</td>
+        <td>{{this.distributor_street}}</td>
+        <td>{{this.distributor_city}}</td>  
+        <td>{{this.distributor_state}}</td>  
+        <td>{{this.distributor_zip}}</td>
+        <td>{{this.distributor_phone}}</td>
+        <td>{{this.distributor_contact_person}}</td>
+        <td><button>Delete</button></td>
     </tr>
-    <tr>
-        <td>2</td>
-        <td>Pacific Garment Wholesale</td>
-        <td>4410 1st Ave S</td>
-        <td>Seattle</td>
-        <td>WA</td>
-        <td>98134</td>
-        <td>206-555-0189</td>
-        <td>James Okafor</td>
-        <td><a href="/distributors?delete_distributor_id=2"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>Northwest Outdoor Apparel</td>
-        <td>275 Riverfront Ave</td>
-        <td>Eugene</td>
-        <td>OR</td>
-        <td>97401</td>
-        <td>541-555-0198</td>
-        <td>Elena Brooks</td>
-        <td><a href="/distributors?delete_distributor_id=3"><button>Delete</button></a></td>
-    </tr>
+    {{/each}} 
 </table>
 
 <h2>Create a distributor</h2>

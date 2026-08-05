@@ -16,8 +16,18 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/customers', (req, res) => {
-    res.render('customers');
+app.get('/customers', async function (req, res) {
+    try {
+        const query = `SELECT customer_id, customer_first_name, customer_last_name,
+                              customer_street, customer_city, customer_state,
+                              customer_zip, customer_phone, customer_email
+                       FROM Customers;`;
+        const [customers] = await db.query(query);
+        res.render('customers', { customers: customers });
+    } catch (error) {
+        console.error('Error loading customers:', error);
+        res.status(500).send('An error occurred loading customers.');
+    }
 });
 
 app.get('/orders', (req, res) => {
@@ -44,8 +54,18 @@ app.get('/inventory', async function (req, res) {
     }
 });
 
-app.get('/distributors', (req, res) => {
-    res.render('distributors');
+app.get('/distributors', async function (req, res) {
+    try {
+        const query = `SELECT distributor_id, distributor_name, distributor_street,
+                              distributor_city, distributor_state, distributor_zip,
+                              distributor_phone, distributor_contact_person
+                       FROM Distributors;`;
+        const [distributors] = await db.query(query);
+        res.render('distributors', { distributors: distributors });
+    } catch (error) {
+        console.error('Error loading distributors:', error);
+        res.status(500).send('An error occurred loading distributors.');
+    }
 });
 
 app.get('/purchases', (req, res) => {
