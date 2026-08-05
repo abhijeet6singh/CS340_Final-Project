@@ -1,3 +1,4 @@
+const db = require('./database/db-connector');
 const express = require('express');
 const { engine } = require('express-handlebars');
 
@@ -41,6 +42,17 @@ app.get('/purchases', (req, res) => {
 
 app.get('/purchaseitems', (req, res) => {
     res.render('purchaseitems');
+});
+
+// RESET route: calls the stored procedure that rebuilds the schema and sample data
+app.post('/reset', async function (req, res) {
+    try {
+        await db.query('CALL sp_load_peakapparel();');
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error running RESET:', error);
+        res.status(500).send('An error occurred while resetting the database.');
+    }
 });
 
 app.listen(PORT, () => {

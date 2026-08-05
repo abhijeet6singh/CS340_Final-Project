@@ -19,6 +19,7 @@
   "homepage": "https://github.com/abhijeet6singh/CS340_Final-Project#readme",
   "dependencies": {
     "express": "^4.22.2",
-    "express-handlebars": "^6.0.7"
+    "express-handlebars": "^6.0.7",
+    "mysql2": "^3.23.2"
   }
 }
