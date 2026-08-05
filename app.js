@@ -28,8 +28,20 @@ app.get('/orderitems', (req, res) => {
     res.render('orderitems');
 });
 
-app.get('/inventory', (req, res) => {
-    res.render('inventory');
+app.get('/inventory', async function (req, res) {
+    try {
+        const query = `SELECT Inventory.inventory_id, Inventory.sku, Inventory.inventory_type,
+                              Inventory.brand_name, Distributors.distributor_name,
+                              Inventory.retail_price, Inventory.quantity_in_stock
+                       FROM Inventory
+                       INNER JOIN Distributors
+                           ON Inventory.distributor_id = Distributors.distributor_id;`;
+        const [inventory] = await db.query(query);
+        res.render('inventory', { inventory: inventory });
+    } catch (error) {
+        console.error('Error loading inventory:', error);
+        res.status(500).send('An error occurred loading inventory.');
+    }
 });
 
 app.get('/distributors', (req, res) => {
@@ -52,6 +64,17 @@ app.post('/reset', async function (req, res) {
     } catch (error) {
         console.error('Error running RESET:', error);
         res.status(500).send('An error occurred while resetting the database.');
+    }
+});
+
+// Demo CUD operation: deletes one inventory item so the RESET can be verified
+app.post('/inventory/delete-demo', async function (req, res) {
+    try {
+        await db.query('CALL sp_delete_demo_item();');
+        res.redirect('/inventory');
+    } catch (error) {
+        console.error('Error executing demo delete:', error);
+        res.status(500).send('An error occurred during the demo delete.');
     }
 });
 
