@@ -147,7 +147,8 @@ app.post('/reset', async function (req, res) {
 // Demo CUD operation: deletes one inventory item so the RESET can be verified
 app.post('/inventory/delete-demo', async function (req, res) {
     try {
-        await db.query('CALL sp_delete_demo_item();');
+        const inventoryID = req.body.inventory_id;
+        await db.query('CALL sp_delete_demo_item(?);', [inventoryID]);
         res.redirect('/inventory');
     } catch (error) {
         console.error('Error executing demo delete:', error);
