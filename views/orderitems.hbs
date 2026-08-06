@@ -13,61 +13,19 @@
         <th>Shipping date</th>
         <th></th>
     </tr>
+    {{#each orderitems}}
     <tr>
-        <td>7001</td>
-        <td>#3001 &middot; Maya Torres &middot; 2026-07-03</td>
-        <td>JKT-204 &middot; Columbia Rain Jacket</td>
-        <td>1</td>
-        <td>0.00</td>
-        <td>89.99</td>
-        <td>N/A</td>
-        <td></td>
-        <td><a href="/orderitems?delete_order_item_id=7001"><button>Delete</button></a></td>
+        <td>{{this.order_item_id}}</td>
+        <td>{{this.order_id}}</td>
+        <td>{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</td>
+        <td>{{this.quantity}}</td>
+        <td>{{this.discount_percent}}</td>
+        <td>{{this.selling_price}}</td>
+        <td>{{this.shipped}}</td>
+        <td>{{this.shipping_date}}</td>
+        <td><button>Delete</button></td>
     </tr>
-    <tr>
-        <td>7002</td>
-        <td>#3001 &middot; Maya Torres &middot; 2026-07-03</td>
-        <td>BNE-055 &middot; Patagonia Beanie</td>
-        <td>1</td>
-        <td>10.00</td>
-        <td>31.49</td>
-        <td>N/A</td>
-        <td></td>
-        <td><a href="/orderitems?delete_order_item_id=7002"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>7003</td>
-        <td>#3002 &middot; Maya Torres &middot; 2026-07-10</td>
-        <td>HDY-118 &middot; Carhartt Hoodie</td>
-        <td>2</td>
-        <td>0.00</td>
-        <td>42.50</td>
-        <td>Yes</td>
-        <td>2026-07-11</td>
-        <td><a href="/orderitems?delete_order_item_id=7003"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>7004</td>
-        <td>#3003 &middot; Devon Park &middot; 2026-07-12</td>
-        <td>JNS-310 &middot; Levi's Jeans</td>
-        <td>1</td>
-        <td>15.00</td>
-        <td>46.74</td>
-        <td>No</td>
-        <td></td>
-        <td><a href="/orderitems?delete_order_item_id=7004"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>7005</td>
-        <td>#3004 &middot; Lena Fischer &middot; 2026-07-15</td>
-        <td>JKT-204 &middot; Columbia Rain Jacket</td>
-        <td>1</td>
-        <td>0.00</td>
-        <td>89.99</td>
-        <td>N/A</td>
-        <td></td>
-        <td><a href="/orderitems?delete_order_item_id=7005"><button>Delete</button></a></td>
-    </tr>
+    {{/each}}
 </table>
 
 <h2>Create an order item</h2>

@@ -14,42 +14,20 @@
         <th>Email</th>
         <th></th>
     </tr>
+    {{#each customers}}
     <tr>
-        <td>1</td>
-        <td>Maya</td>
-        <td>Torres</td>
-        <td>412 Alder St</td>
-        <td>Corvallis</td>
-        <td>OR</td>
-        <td>97330</td>
-        <td>541-555-0142</td>
-        <td>maya.t@example.com</td>
-        <td><a href="/customers?delete_customer_id=1"><button>Delete</button></a></td>
+        <td>{{this.customer_id}}</td>
+        <td>{{this.customer_first_name}}</td>
+        <td>{{this.customer_last_name}}</td>
+        <td>{{this.customer_street}}</td>
+        <td>{{this.customer_city}}</td>
+        <td>{{this.customer_state}}</td>
+        <td>{{this.customer_zip}}</td>
+        <td>{{this.customer_phone}}</td>
+        <td>{{this.customer_email}}</td>
+        <td><button>Delete</button></td>
     </tr>
-    <tr>
-        <td>2</td>
-        <td>Devon</td>
-        <td>Park</td>
-        <td>88 NW Harrison Blvd</td>
-        <td>Corvallis</td>
-        <td>OR</td>
-        <td>97330</td>
-        <td>541-555-0177</td>
-        <td>dpark@example.com</td>
-        <td><a href="/customers?delete_customer_id=2"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>Lena</td>
-        <td>Fischer</td>
-        <td>1520 SE Division St</td>
-        <td>Portland</td>
-        <td>OR</td>
-        <td>97202</td>
-        <td>503-555-0110</td>
-        <td>lenaf@example.com</td>
-        <td><a href="/customers?delete_customer_id=3"><button>Delete</button></a></td>
-    </tr>
+    {{/each}} 
 </table>
 
 <h2>Create a customer</h2>
