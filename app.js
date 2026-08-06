@@ -151,15 +151,15 @@ app.post('/reset', async function (req, res) {
     }
 });
 
-// Demo CUD operation: deletes one inventory item so the RESET can be verified
-app.post('/inventory/delete-demo', async function (req, res) {
+// Inventory CUD operation: deletes one inventory item so the RESET can be verified
+app.post('/inventory/delete-inventory', async function (req, res) {
     try {
         const inventoryID = req.body.inventory_id;
-        await db.query('CALL sp_delete_demo_item(?);', [inventoryID]);
+        await db.query('CALL sp_delete_inventory(?);', [inventoryID]);
         res.redirect('/inventory');
     } catch (error) {
-        console.error('Error executing demo delete:', error);
-        res.status(500).send('An error occurred during the demo delete.');
+        console.error('Error executing inventory delete:', error);
+        res.status(500).send('An error occurred during the inventory delete.');
     }
 });
 
