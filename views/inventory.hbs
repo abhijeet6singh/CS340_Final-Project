@@ -21,7 +21,12 @@
         <td>{{this.distributor_name}}</td>
         <td>{{this.retail_price}}</td>
         <td>{{this.quantity_in_stock}}</td>
-        <td><button>Delete</button></td>
+        <td>
+            <form style="display:inline" method="POST" action="/inventory/delete-demo">
+                <input type="hidden" name="inventory_id" value="{{this.inventory_id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {{/each}}   
 </table>
