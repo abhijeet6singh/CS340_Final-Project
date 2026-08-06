@@ -12,46 +12,18 @@
         <th>Pickup or ship</th>
         <th></th>
     </tr>
+    {{#each orders}}
     <tr>
-        <td>3001</td>
-        <td>Maya Torres</td>
-        <td>2026-07-03</td>
-        <td>credit</td>
-        <td>4821</td>
-        <td>Yes</td>
-        <td>pickup</td>
-        <td><a href="/orders?delete_order_id=3001"><button>Delete</button></a></td>
+        <td>{{this.order_id}}</td>
+        <td>{{this.customer_first_name}} {{this.customer_last_name}}</td>
+        <td>{{this.order_date}}</td>
+        <td>{{this.payment_method}}</td>
+        <td>{{this.payment_last_four}}</td>
+        <td>{{this.order_complete}}</td>
+        <td>{{this.pickup_or_ship}}</td>
+        <td><button>Delete</button></td>
     </tr>
-    <tr>
-        <td>3002</td>
-        <td>Maya Torres</td>
-        <td>2026-07-10</td>
-        <td>debit</td>
-        <td>7754</td>
-        <td>Yes</td>
-        <td>ship</td>
-        <td><a href="/orders?delete_order_id=3002"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>3003</td>
-        <td>Devon Park</td>
-        <td>2026-07-12</td>
-        <td>credit</td>
-        <td>1096</td>
-        <td>No</td>
-        <td>ship</td>
-        <td><a href="/orders?delete_order_id=3003"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>3004</td>
-        <td>Lena Fischer</td>
-        <td>2026-07-15</td>
-        <td>cash</td>
-        <td></td>
-        <td>Yes</td>
-        <td>pickup</td>
-        <td><a href="/orders?delete_order_id=3004"><button>Delete</button></a></td>
-    </tr>
+    {{/each}}
 </table>
 
 <h2>Create an order</h2>

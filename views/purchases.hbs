@@ -8,24 +8,14 @@
         <th>Distributor</th>
         <th></th>
     </tr>
+    {{#each purchases}}
     <tr>
-        <td>5001</td>
-        <td>2026-06-02</td>
-        <td>Cascade Apparel Supply</td>
-        <td><a href="/purchases?delete_purchase_id=5001"><button>Delete</button></a></td>
+        <td>{{this.purchase_id}}</td>
+        <td>{{this.purchase_date}}</td>
+        <td>{{this.distributor_name}}</td>
+        <td><button>Delete</button></td>
     </tr>
-    <tr>
-        <td>5002</td>
-        <td>2026-06-15</td>
-        <td>Pacific Garment Wholesale</td>
-        <td><a href="/purchases?delete_purchase_id=5002"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>5003</td>
-        <td>2026-07-01</td>
-        <td>Northwest Outdoor Apparel</td>
-        <td><a href="/purchases?delete_purchase_id=5003"><button>Delete</button></a></td>
-    </tr>
+    {{/each}}
 </table>
 
 <h2>Create a purchase</h2>

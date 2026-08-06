@@ -10,46 +10,16 @@
         <th>Price paid</th>
         <th></th>
     </tr>
+    <{{#each purchaseitems}}
     <tr>
-        <td>9001</td>
-        <td>#5001 &middot; Cascade Apparel Supply &middot; 2026-06-02</td>
-        <td>JKT-204 &middot; Columbia Rain Jacket</td>
-        <td>8</td>
-        <td>51.00</td>
-        <td><a href="/purchaseitems?delete_purchase_item_id=9001"><button>Delete</button></a></td>
+        <td>{{this.purchase_item_id}}</td>
+        <td>{{this.purchase_id}}</td>
+        <td>{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</td>
+        <td>{{this.quantity_purchased}}</td>
+        <td>{{this.price_paid}}</td>
+        <td><button>Delete</button></td>
     </tr>
-    <tr>
-        <td>9002</td>
-        <td>#5001 &middot; Cascade Apparel Supply &middot; 2026-06-02</td>
-        <td>HDY-118 &middot; Carhartt Hoodie</td>
-        <td>10</td>
-        <td>24.75</td>
-        <td><a href="/purchaseitems?delete_purchase_item_id=9002"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>9003</td>
-        <td>#5002 &middot; Pacific Garment Wholesale &middot; 2026-06-15</td>
-        <td>JNS-310 &middot; Levi's Jeans</td>
-        <td>6</td>
-        <td>31.50</td>
-        <td><a href="/purchaseitems?delete_purchase_item_id=9003"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>9004</td>
-        <td>#5002 &middot; Pacific Garment Wholesale &middot; 2026-06-15</td>
-        <td>BNE-055 &middot; Patagonia Beanie</td>
-        <td>15</td>
-        <td>19.25</td>
-        <td><a href="/purchaseitems?delete_purchase_item_id=9004"><button>Delete</button></a></td>
-    </tr>
-    <tr>
-        <td>9005</td>
-        <td>#5003 &middot; Northwest Outdoor Apparel &middot; 2026-07-01</td>
-        <td>JKT-204 &middot; Columbia Rain Jacket</td>
-        <td>10</td>
-        <td>49.50</td>
-        <td><a href="/purchaseitems?delete_purchase_item_id=9005"><button>Delete</button></a></td>
-    </tr>
+    {{/each}}   
 </table>
 
 <h2>Create a purchase item</h2>
