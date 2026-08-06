@@ -7,9 +7,13 @@
 -- The tables are dropped first so the script can be rerun during testing.
 -- Foreign key checks are turned off temporarily because some tables depend on others.
 
-SET FOREIGN_KEY_CHECKS = 0;
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
+DROP PROCEDURE IF EXISTS sp_load_peakapparel;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_load_peakapparel()
+BEGIN
+    SET FOREIGN_KEY_CHECKS = 0;
 
 -- Drop child tables before parent tables because of foreign key relationships.
 -- This prevents errors when resetting the database.
@@ -259,5 +263,9 @@ VALUES
 (9004, 5002, 104, 15, 19.25),
 (9005, 5003, 101, 10, 49.50);
 
-SET FOREIGN_KEY_CHECKS = 1;
-COMMIT;
+    SET FOREIGN_KEY_CHECKS = 1;
+END //
+
+DELIMITER ;
+
+CALL sp_load_peakapparel();
