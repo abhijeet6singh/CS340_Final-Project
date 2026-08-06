@@ -21,7 +21,8 @@ app.get('/customers', async function (req, res) {
         const query = `SELECT customer_id, customer_first_name, customer_last_name,
                               customer_street, customer_city, customer_state,
                               customer_zip, customer_phone, customer_email
-                       FROM Customers;`;
+                       FROM Customers
+                       ORDER BY customer_id;`;
         const [customers] = await db.query(query);
         res.render('customers', { customers: customers });
     } catch (error) {
@@ -39,7 +40,8 @@ app.get('/orders', async function (req, res) {
                               Orders.pickup_or_ship
                        FROM Orders
                        INNER JOIN Customers
-                           ON Orders.customer_id = Customers.customer_id;`;
+                           ON Orders.customer_id = Customers.customer_id
+                           ORDER BY Orders.order_id;`;
         const [orders] = await db.query(query);
         res.render('orders', { orders: orders });
     } catch (error) {
@@ -60,7 +62,8 @@ app.get('/orderitems', async function (req, res) {
                        INNER JOIN Orders
                            ON OrderItems.order_id = Orders.order_id
                        INNER JOIN Inventory
-                           ON OrderItems.inventory_id = Inventory.inventory_id;`;
+                           ON OrderItems.inventory_id = Inventory.inventory_id
+                           ORDER BY OrderItems.order_item_id;`;
         const [orderitems] = await db.query(query);
         res.render('orderitems', { orderitems: orderitems });
     } catch (error) {
@@ -76,7 +79,8 @@ app.get('/inventory', async function (req, res) {
                               Inventory.retail_price, Inventory.quantity_in_stock
                        FROM Inventory
                        INNER JOIN Distributors
-                           ON Inventory.distributor_id = Distributors.distributor_id;`;
+                           ON Inventory.distributor_id = Distributors.distributor_id
+                           ORDER BY Inventory.inventory_id;`;
         const [inventory] = await db.query(query);
         res.render('inventory', { inventory: inventory });
     } catch (error) {
@@ -90,7 +94,8 @@ app.get('/distributors', async function (req, res) {
         const query = `SELECT distributor_id, distributor_name, distributor_street,
                               distributor_city, distributor_state, distributor_zip,
                               distributor_phone, distributor_contact_person
-                       FROM Distributors;`;
+                       FROM Distributors
+                       ORDER BY distributor_id;`;
         const [distributors] = await db.query(query);
         res.render('distributors', { distributors: distributors });
     } catch (error) {
@@ -105,7 +110,8 @@ app.get('/purchases', async function (req, res) {
                               Purchases.distributor_id, Distributors.distributor_name
                        FROM Purchases
                        INNER JOIN Distributors
-                           ON Purchases.distributor_id = Distributors.distributor_id;`;
+                           ON Purchases.distributor_id = Distributors.distributor_id
+                           ORDER BY Purchases.purchase_id;`;
         const [purchases] = await db.query(query);
         res.render('purchases', { purchases: purchases });
     } catch (error) {
@@ -124,7 +130,8 @@ app.get('/purchaseitems', async function (req, res) {
                        INNER JOIN Purchases
                            ON PurchaseItems.purchase_id = Purchases.purchase_id
                        INNER JOIN Inventory
-                           ON PurchaseItems.inventory_id = Inventory.inventory_id;`;
+                           ON PurchaseItems.inventory_id = Inventory.inventory_id
+                           ORDER BY PurchaseItems.purchase_item_id;`;
         const [purchaseitems] = await db.query(query);
         res.render('purchaseitems', { purchaseitems: purchaseitems });
     } catch (error) {
