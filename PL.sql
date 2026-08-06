@@ -11,7 +11,7 @@ DROP PROCEDURE IF EXISTS sp_delete_inventory;
 
 DELIMITER //
 
-CREATE PROCEDURE sp_delete_demo_item(IN p_inventory_id INT)
+CREATE PROCEDURE sp_delete_inventory(IN p_inventory_id INT)
 BEGIN
     DELETE FROM Inventory
     WHERE inventory_id = p_inventory_id;
