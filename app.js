@@ -41,7 +41,7 @@ app.get('/orders', async function (req, res) {
                        FROM Orders
                        INNER JOIN Customers
                            ON Orders.customer_id = Customers.customer_id
-                           ORDER BY Orders.order_id;`;
+                        ORDER BY Orders.order_id;`;
         const [orders] = await db.query(query);
         res.render('orders', { orders: orders });
     } catch (error) {
@@ -63,7 +63,7 @@ app.get('/orderitems', async function (req, res) {
                            ON OrderItems.order_id = Orders.order_id
                        INNER JOIN Inventory
                            ON OrderItems.inventory_id = Inventory.inventory_id
-                           ORDER BY OrderItems.order_item_id;`;
+                        ORDER BY OrderItems.order_item_id;`;
         const [orderitems] = await db.query(query);
         res.render('orderitems', { orderitems: orderitems });
     } catch (error) {
@@ -80,7 +80,7 @@ app.get('/inventory', async function (req, res) {
                        FROM Inventory
                        INNER JOIN Distributors
                            ON Inventory.distributor_id = Distributors.distributor_id
-                           ORDER BY Inventory.inventory_id;`;
+                        ORDER BY Inventory.inventory_id;`;
         const [inventory] = await db.query(query);
         res.render('inventory', { inventory: inventory });
     } catch (error) {
@@ -111,7 +111,7 @@ app.get('/purchases', async function (req, res) {
                        FROM Purchases
                        INNER JOIN Distributors
                            ON Purchases.distributor_id = Distributors.distributor_id
-                           ORDER BY Purchases.purchase_id;`;
+                        ORDER BY Purchases.purchase_id;`;
         const [purchases] = await db.query(query);
         res.render('purchases', { purchases: purchases });
     } catch (error) {
@@ -131,7 +131,7 @@ app.get('/purchaseitems', async function (req, res) {
                            ON PurchaseItems.purchase_id = Purchases.purchase_id
                        INNER JOIN Inventory
                            ON PurchaseItems.inventory_id = Inventory.inventory_id
-                           ORDER BY PurchaseItems.purchase_item_id;`;
+                        ORDER BY PurchaseItems.purchase_item_id;`;
         const [purchaseitems] = await db.query(query);
         res.render('purchaseitems', { purchaseitems: purchaseitems });
     } catch (error) {
@@ -160,6 +160,129 @@ app.post('/inventory/delete-inventory', async function (req, res) {
     } catch (error) {
         console.error('Error executing inventory delete:', error);
         res.status(500).send('An error occurred during the inventory delete.');
+    }
+});
+
+// Inventory CREATE operation
+app.post('/inventory/create', async function (req, res) {
+    try {
+        const {
+            sku,
+            inventory_type,
+            brand_name,
+            distributor_id,
+            retail_price,
+            quantity_in_stock
+        } = req.body;
+
+        await db.query(
+            'CALL sp_create_inventory(?, ?, ?, ?, ?, ?);',
+            [sku, inventory_type, brand_name, distributor_id, retail_price, quantity_in_stock]
+        );
+
+        res.redirect('/inventory');
+    } catch (error) {
+        console.error('Error creating inventory item:', error);
+        res.status(500).send('An error occurred while creating the inventory item.');
+    }
+});
+
+
+// Inventory UPDATE operation
+app.post('/inventory/update', async function (req, res) {
+    try {
+        const {
+            inventory_id,
+            sku,
+            inventory_type,
+            brand_name,
+            distributor_id,
+            retail_price,
+            quantity_in_stock
+        } = req.body;
+
+        await db.query(
+            'CALL sp_update_inventory(?, ?, ?, ?, ?, ?, ?);',
+            [inventory_id, sku, inventory_type, brand_name, distributor_id, retail_price, quantity_in_stock]
+        );
+
+        res.redirect('/inventory');
+    } catch (error) {
+        console.error('Error updating inventory item:', error);
+        res.status(500).send('An error occurred while updating the inventory item.');
+    }
+});
+
+
+// OrderItems CREATE operation
+app.post('/orderitems/create', async function (req, res) {
+    try {
+        const {
+            order_id,
+            inventory_id,
+            quantity,
+            discount_percent,
+            selling_price,
+            shipped,
+            shipping_date
+        } = req.body;
+
+        const shippedValue = shipped === '' ? null : shipped;
+        const shippingDateValue = shipping_date === '' ? null : shipping_date;
+
+        await db.query(
+            'CALL sp_create_orderitem(?, ?, ?, ?, ?, ?, ?);',
+            [order_id, inventory_id, quantity, discount_percent, selling_price, shippedValue, shippingDateValue]
+        );
+
+        res.redirect('/orderitems');
+    } catch (error) {
+        console.error('Error creating order item:', error);
+        res.status(500).send('An error occurred while creating the order item.');
+    }
+});
+
+
+// OrderItems UPDATE M:N operation
+app.post('/orderitems/update', async function (req, res) {
+    try {
+        const {
+            order_item_id,
+            inventory_id,
+            quantity,
+            discount_percent,
+            selling_price,
+            shipped,
+            shipping_date
+        } = req.body;
+
+        const shippedValue = shipped === '' ? null : shipped;
+        const shippingDateValue = shipping_date === '' ? null : shipping_date;
+
+        await db.query(
+            'CALL sp_update_orderitem(?, ?, ?, ?, ?, ?, ?);',
+            [order_item_id, inventory_id, quantity, discount_percent, selling_price, shippedValue, shippingDateValue]
+        );
+
+        res.redirect('/orderitems');
+    } catch (error) {
+        console.error('Error updating order item:', error);
+        res.status(500).send('An error occurred while updating the order item.');
+    }
+});
+
+
+// OrderItems DELETE M:N operation
+app.post('/orderitems/delete', async function (req, res) {
+    try {
+        const orderItemID = req.body.order_item_id;
+
+        await db.query('CALL sp_delete_orderitem(?);', [orderItemID]);
+
+        res.redirect('/orderitems');
+    } catch (error) {
+        console.error('Error deleting order item:', error);
+        res.status(500).send('An error occurred while deleting the order item.');
     }
 });
 

@@ -1,11 +1,10 @@
--- Project Step 4 Draft
+-- Project Step 5 Final
 -- Team Members: Julie Glass & Abhijeet Singh
 -- Group Number: 15
 -- Project Title: Peak Apparel Co. Inventory Management System
 
--- This stored procedure is the full CUD Operation for Inventory
--- and OrderItems
--- It does functions like "CREATE" "UPDATE" and "DELETE".
+-- This file contains procedures for Inventory and OrderItems CUD Operations.
+-- It contains procedures like "CREATE" "UPDATE" and "DELETE".
 
 -- ============================================================
 -- CREATE Inventory
