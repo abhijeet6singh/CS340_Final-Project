@@ -25,13 +25,18 @@
         <td>{{this.customer_zip}}</td>
         <td>{{this.customer_phone}}</td>
         <td>{{this.customer_email}}</td>
-        <td><button>Delete</button></td>
+        <td>
+            <form style="display:inline" method="POST" action="/customers/delete">
+                <input type="hidden" name="customer_id" value="{{this.customer_id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {{/each}} 
 </table>
 
 <h2>Create a customer</h2>
-<form action="/customers" method="POST">
+<form action="/customers/create" method="POST">
     <label for="customer_first_name">First name:</label>
     <input type="text" name="customer_first_name" id="customer_first_name">
 
@@ -60,7 +65,7 @@
 </form>
 
 <h2>Update a customer</h2>
-<form action="/customers" method="POST">
+<form action="/customers/update" method="POST">
     <label for="update_customer_id">Customer to update:</label>
     <select name="customer_id" id="update_customer_id">
         <option value="">Select a customer</option>

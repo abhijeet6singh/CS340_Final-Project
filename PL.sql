@@ -185,3 +185,111 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- ============================================================
+-- CREATE Customer
+-- ============================================================
+
+DROP PROCEDURE IF EXISTS sp_create_customer;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_create_customer(
+    IN p_customer_first_name VARCHAR(50),
+    IN p_customer_last_name VARCHAR(50),
+    IN p_customer_street VARCHAR(100),
+    IN p_customer_city VARCHAR(50),
+    IN p_customer_state CHAR(2),
+    IN p_customer_zip VARCHAR(10),
+    IN p_customer_phone VARCHAR(20),
+    IN p_customer_email VARCHAR(100)
+)
+COMMENT 'Creates a new customer.'
+BEGIN
+    INSERT INTO Customers (
+        customer_first_name,
+        customer_last_name,
+        customer_street,
+        customer_city,
+        customer_state,
+        customer_zip,
+        customer_phone,
+        customer_email
+    )
+    VALUES (
+        p_customer_first_name,
+        p_customer_last_name,
+        p_customer_street,
+        p_customer_city,
+        p_customer_state,
+        p_customer_zip,
+        p_customer_phone,
+        p_customer_email
+    );
+END //
+
+DELIMITER ;
+
+
+-- ============================================================
+-- UPDATE Customer
+-- ============================================================
+
+DROP PROCEDURE IF EXISTS sp_update_customer;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_update_customer(
+    IN p_customer_id INT,
+    IN p_customer_first_name VARCHAR(50),
+    IN p_customer_last_name VARCHAR(50),
+    IN p_customer_street VARCHAR(100),
+    IN p_customer_city VARCHAR(50),
+    IN p_customer_state CHAR(2),
+    IN p_customer_zip VARCHAR(10),
+    IN p_customer_phone VARCHAR(20),
+    IN p_customer_email VARCHAR(100)
+)
+COMMENT 'Updates an existing customer.'
+BEGIN
+    UPDATE Customers
+    SET customer_first_name = p_customer_first_name,
+        customer_last_name = p_customer_last_name,
+        customer_street = p_customer_street,
+        customer_city = p_customer_city,
+        customer_state = p_customer_state,
+        customer_zip = p_customer_zip,
+        customer_phone = p_customer_phone,
+        customer_email = p_customer_email
+    WHERE customer_id = p_customer_id;
+END //
+
+DELIMITER ;
+
+
+-- ============================================================
+-- DELETE Customer
+-- ============================================================
+
+DROP PROCEDURE IF EXISTS sp_delete_customer;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_delete_customer(IN p_customer_id INT)
+COMMENT 'Deletes a customer and related order records.'
+BEGIN
+    DELETE FROM OrderItems
+    WHERE order_id IN (
+        SELECT order_id
+        FROM Orders
+        WHERE customer_id = p_customer_id
+    );
+
+    DELETE FROM Orders
+    WHERE customer_id = p_customer_id;
+
+    DELETE FROM Customers
+    WHERE customer_id = p_customer_id;
+END //
+
+DELIMITER ;

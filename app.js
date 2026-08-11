@@ -286,6 +286,96 @@ app.post('/orderitems/delete', async function (req, res) {
     }
 });
 
+
+// Customers CREATE operation
+app.post('/customers/create', async function (req, res) {
+    try {
+        const {
+            customer_first_name,
+            customer_last_name,
+            customer_street,
+            customer_city,
+            customer_state,
+            customer_zip,
+            customer_phone,
+            customer_email
+        } = req.body;
+
+        await db.query(
+            'CALL sp_create_customer(?, ?, ?, ?, ?, ?, ?, ?);',
+            [
+                customer_first_name,
+                customer_last_name,
+                customer_street,
+                customer_city,
+                customer_state,
+                customer_zip,
+                customer_phone,
+                customer_email
+            ]
+        );
+
+        res.redirect('/customers');
+    } catch (error) {
+        console.error('Error creating customer:', error);
+        res.status(500).send('An error occurred while creating the customer.');
+    }
+});
+
+
+// Customers UPDATE operation
+app.post('/customers/update', async function (req, res) {
+    try {
+        const {
+            customer_id,
+            customer_first_name,
+            customer_last_name,
+            customer_street,
+            customer_city,
+            customer_state,
+            customer_zip,
+            customer_phone,
+            customer_email
+        } = req.body;
+
+        await db.query(
+            'CALL sp_update_customer(?, ?, ?, ?, ?, ?, ?, ?, ?);',
+            [
+                customer_id,
+                customer_first_name,
+                customer_last_name,
+                customer_street,
+                customer_city,
+                customer_state,
+                customer_zip,
+                customer_phone,
+                customer_email
+            ]
+        );
+
+        res.redirect('/customers');
+    } catch (error) {
+        console.error('Error updating customer:', error);
+        res.status(500).send('An error occurred while updating the customer.');
+    }
+});
+
+
+// Customers DELETE operation
+app.post('/customers/delete', async function (req, res) {
+    try {
+        const customerID = req.body.customer_id;
+
+        await db.query('CALL sp_delete_customer(?);', [customerID]);
+
+        res.redirect('/customers');
+    } catch (error) {
+        console.error('Error deleting customer:', error);
+        res.status(500).send('An error occurred while deleting the customer.');
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.');
 });
