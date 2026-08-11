@@ -479,3 +479,74 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- CREATE Purchase
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_create_purchase;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_create_purchase(
+    IN p_purchase_date DATE,
+    IN p_distributor_id INT
+)
+COMMENT 'Creates a new purchase.'
+BEGIN
+    INSERT INTO Purchases (
+        purchase_date,
+        distributor_id
+    )
+    VALUES (
+        p_purchase_date,
+        p_distributor_id
+    );
+END //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- UPDATE Purchase
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_update_purchase;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_update_purchase(
+    IN p_purchase_id INT,
+    IN p_purchase_date DATE,
+    IN p_distributor_id INT
+)
+COMMENT 'Updates an existing purchase.'
+BEGIN
+    UPDATE Purchases
+    SET purchase_date = p_purchase_date,
+        distributor_id = p_distributor_id
+    WHERE purchase_id = p_purchase_id;
+END //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- DELETE Purchase
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_delete_purchase;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_delete_purchase(IN p_purchase_id INT)
+COMMENT 'Deletes a purchase and its purchase item rows.'
+BEGIN
+    DELETE FROM PurchaseItems
+    WHERE purchase_id = p_purchase_id;
+
+    DELETE FROM Purchases
+    WHERE purchase_id = p_purchase_id;
+END //
+
+DELIMITER ;

@@ -530,6 +530,64 @@ app.post('/orders/delete', async function (req, res) {
 });
 
 
+// Purchases CREATE operation
+app.post('/purchases/create', async function (req, res) {
+    try {
+        const {
+            purchase_date,
+            distributor_id
+        } = req.body;
+
+        await db.query(
+            'CALL sp_create_purchase(?, ?);',
+            [purchase_date, distributor_id]
+        );
+
+        res.redirect('/purchases');
+    } catch (error) {
+        console.error('Error creating purchase:', error);
+        res.status(500).send('An error occurred while creating the purchase.');
+    }
+});
+
+
+// Purchases UPDATE operation
+app.post('/purchases/update', async function (req, res) {
+    try {
+        const {
+            purchase_id,
+            purchase_date,
+            distributor_id
+        } = req.body;
+
+        await db.query(
+            'CALL sp_update_purchase(?, ?, ?);',
+            [purchase_id, purchase_date, distributor_id]
+        );
+
+        res.redirect('/purchases');
+    } catch (error) {
+        console.error('Error updating purchase:', error);
+        res.status(500).send('An error occurred while updating the purchase.');
+    }
+});
+
+
+// Purchases DELETE operation
+app.post('/purchases/delete', async function (req, res) {
+    try {
+        const purchaseID = req.body.purchase_id;
+
+        await db.query('CALL sp_delete_purchase(?);', [purchaseID]);
+
+        res.redirect('/purchases');
+    } catch (error) {
+        console.error('Error deleting purchase:', error);
+        res.status(500).send('An error occurred while deleting the purchase.');
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.');
 });
