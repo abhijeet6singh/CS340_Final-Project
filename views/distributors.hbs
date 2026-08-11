@@ -1,7 +1,7 @@
 <h1>Distributors</h1>
 
 <h2>Browse distributors</h2>
-<table border="1" cellpadding="5">
+<table class="data-table">
     <tr>
         <th>ID</th>
         <th>Name</th>
@@ -18,72 +18,128 @@
         <td>{{this.distributor_id}}</td>
         <td>{{this.distributor_name}}</td>
         <td>{{this.distributor_street}}</td>
-        <td>{{this.distributor_city}}</td>  
-        <td>{{this.distributor_state}}</td>  
+        <td>{{this.distributor_city}}</td>
+        <td>{{this.distributor_state}}</td>
         <td>{{this.distributor_zip}}</td>
         <td>{{this.distributor_phone}}</td>
         <td>{{this.distributor_contact_person}}</td>
         <td><button>Delete</button></td>
     </tr>
-    {{/each}} 
+    {{/each}}
 </table>
 
 <h2>Create a distributor</h2>
-<form>
-    <label for="distributor_name">Distributor name:</label>
-    <input type="text" name="distributor_name" id="distributor_name">
+<form action="/distributors" method="POST" class="form-card">
+    <div class="field">
+        <label for="distributor_name">Distributor name</label>
+        <input type="text" name="distributor_name" id="distributor_name">
+    </div>
 
-    <label for="distributor_street">Street:</label>
-    <input type="text" name="distributor_street" id="distributor_street">
+    <div class="field">
+        <label for="distributor_street">Street</label>
+        <input type="text" name="distributor_street" id="distributor_street">
+    </div>
 
-    <label for="distributor_city">City:</label>
-    <input type="text" name="distributor_city" id="distributor_city">
+    <div class="field">
+        <label for="distributor_city">City</label>
+        <input type="text" name="distributor_city" id="distributor_city">
+    </div>
 
-    <label for="distributor_state">State:</label>
-    <input type="text" name="distributor_state" id="distributor_state" maxlength="2">
+    <div class="field">
+        <label for="distributor_state">State</label>
+        <select name="distributor_state" id="distributor_state">
+            <option value="">Select a state</option>
+            {{#each states}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="distributor_zip">ZIP:</label>
-    <input type="text" name="distributor_zip" id="distributor_zip">
+    <div class="field">
+        <label for="distributor_zip">ZIP</label>
+        <input type="text" name="distributor_zip" id="distributor_zip">
+    </div>
 
-    <label for="distributor_phone">Phone:</label>
-    <input type="text" name="distributor_phone" id="distributor_phone">
+    <div class="field">
+        <label for="distributor_phone">Phone</label>
+        <input type="text" name="distributor_phone" id="distributor_phone">
+    </div>
 
-    <label for="distributor_contact_person">Contact person:</label>
-    <input type="text" name="distributor_contact_person" id="distributor_contact_person">
+    <div class="field">
+        <label for="distributor_contact_person">Contact person</label>
+        <input type="text" name="distributor_contact_person" id="distributor_contact_person">
+    </div>
 
     <input type="submit" value="Submit">
 </form>
 
 <h2>Update a distributor</h2>
-<form>
-    <label for="update_distributor_id">Distributor to update:</label>
-    <select name="distributor_id" id="update_distributor_id">
-        <option value="">Select a distributor</option>
-        <option value="1">Cascade Apparel Supply</option>
-        <option value="2">Pacific Garment Wholesale</option>
-        <option value="3">Northwest Outdoor Apparel</option>
-    </select>
+<form action="/distributors" method="POST" class="form-card">
+    <div class="field">
+        <label for="update_distributor_id">Distributor to update</label>
+        <select name="distributor_id" id="update_distributor_id">
+            <option value="">Select a distributor</option>
+            {{#each distributors}}
+            <option value="{{this.distributor_id}}">{{this.distributor_name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_distributor_name">Distributor name:</label>
-    <input type="text" name="distributor_name" id="update_distributor_name">
+    <div class="field">
+        <label for="update_distributor_name">Distributor name</label>
+        <input type="text" name="distributor_name" id="update_distributor_name">
+    </div>
 
-    <label for="update_distributor_street">Street:</label>
-    <input type="text" name="distributor_street" id="update_distributor_street">
+    <div class="field">
+        <label for="update_distributor_street">Street</label>
+        <input type="text" name="distributor_street" id="update_distributor_street">
+    </div>
 
-    <label for="update_distributor_city">City:</label>
-    <input type="text" name="distributor_city" id="update_distributor_city">
+    <div class="field">
+        <label for="update_distributor_city">City</label>
+        <input type="text" name="distributor_city" id="update_distributor_city">
+    </div>
 
-    <label for="update_distributor_state">State:</label>
-    <input type="text" name="distributor_state" id="update_distributor_state" maxlength="2">
+    <div class="field">
+        <label for="update_distributor_state">State</label>
+        <select name="distributor_state" id="update_distributor_state">
+            <option value="">Select a state</option>
+            {{#each states}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_distributor_zip">ZIP:</label>
-    <input type="text" name="distributor_zip" id="update_distributor_zip">
+    <div class="field">
+        <label for="update_distributor_zip">ZIP</label>
+        <input type="text" name="distributor_zip" id="update_distributor_zip">
+    </div>
 
-    <label for="update_distributor_phone">Phone:</label>
-    <input type="text" name="distributor_phone" id="update_distributor_phone">
+    <div class="field">
+        <label for="update_distributor_phone">Phone</label>
+        <input type="text" name="distributor_phone" id="update_distributor_phone">
+    </div>
 
-    <label for="update_distributor_contact_person">Contact person:</label>
-    <input type="text" name="distributor_contact_person" id="update_distributor_contact_person">
+    <div class="field">
+        <label for="update_distributor_contact_person">Contact person</label>
+        <input type="text" name="distributor_contact_person" id="update_distributor_contact_person">
+    </div>
 
     <input type="submit" value="Submit">
 </form>
+
+<script>
+    const distributorRecords = {{{json distributors}}};
+
+    document.getElementById('update_distributor_id').addEventListener('change', function () {
+        const record = distributorRecords.find(d => String(d.distributor_id) === this.value);
+        const fields = [
+            'distributor_name', 'distributor_street', 'distributor_city',
+            'distributor_state', 'distributor_zip', 'distributor_phone',
+            'distributor_contact_person'
+        ];
+        fields.forEach(function (field) {
+            document.getElementById('update_' + field).value = record ? (record[field] || '') : '';
+        });
+    });
+</script>

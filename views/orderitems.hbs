@@ -1,7 +1,7 @@
 <h1>Order Items</h1>
 
 <h2>Browse order items</h2>
-<table border="1" cellpadding="5">
+<table class="data-table">
     <tr>
         <th>ID</th>
         <th>Order</th>
@@ -29,83 +29,125 @@
 </table>
 
 <h2>Create an order item</h2>
-<form action="/orderitems" method="POST">
-    <label for="order_id">Order:</label>
-    <select name="order_id" id="order_id">
-        <option value="3001">#3001 &middot; Maya Torres &middot; 2026-07-03</option>
-        <option value="3002">#3002 &middot; Maya Torres &middot; 2026-07-10</option>
-        <option value="3003">#3003 &middot; Devon Park &middot; 2026-07-12</option>
-        <option value="3004">#3004 &middot; Lena Fischer &middot; 2026-07-15</option>
-    </select>
+<form action="/orderitems" method="POST" class="form-card">
+    <div class="field">
+        <label for="order_id">Order</label>
+        <select name="order_id" id="order_id">
+            {{#each orders}}
+            <option value="{{this.order_id}}">#{{this.order_id}} &middot; {{this.customer_first_name}} {{this.customer_last_name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="inventory_id">Inventory item:</label>
-    <select name="inventory_id" id="inventory_id">
-        <option value="101">JKT-204 &middot; Columbia Rain Jacket</option>
-        <option value="102">JNS-310 &middot; Levi's Jeans</option>
-        <option value="103">HDY-118 &middot; Carhartt Hoodie</option>
-        <option value="104">BNE-055 &middot; Patagonia Beanie</option>
-    </select>
+    <div class="field">
+        <label for="inventory_id">Inventory item</label>
+        <select name="inventory_id" id="inventory_id">
+            {{#each inventory}}
+            <option value="{{this.inventory_id}}">{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity" min="1">
+    <div class="field">
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity" id="quantity" min="1">
+    </div>
 
-    <label for="discount_percent">Discount percent:</label>
-    <input type="number" name="discount_percent" id="discount_percent" step="0.01" min="0">
+    <div class="field">
+        <label for="discount_percent">Discount percent</label>
+        <input type="number" name="discount_percent" id="discount_percent" step="0.01" min="0">
+    </div>
 
-    <label for="selling_price">Selling price:</label>
-    <input type="number" name="selling_price" id="selling_price" step="0.01" min="0">
+    <div class="field">
+        <label for="selling_price">Selling price</label>
+        <input type="number" name="selling_price" id="selling_price" step="0.01" min="0">
+    </div>
 
-    <label for="shipped">Shipped:</label>
-    <select name="shipped" id="shipped">
-        <option value="">N/A</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-    </select>
+    <div class="field">
+        <label for="shipped">Shipped</label>
+        <select name="shipped" id="shipped">
+            <option value="">N/A</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
 
-    <label for="shipping_date">Shipping date:</label>
-    <input type="date" name="shipping_date" id="shipping_date">
+    <div class="field">
+        <label for="shipping_date">Shipping date</label>
+        <input type="date" name="shipping_date" id="shipping_date">
+    </div>
 
     <input type="submit" value="Submit">
 </form>
 
 <h2>Update an order item</h2>
-<form action="/orderitems" method="POST">
-    <label for="update_order_item_id">Order item to update:</label>
-    <select name="order_item_id" id="update_order_item_id">
-        <option value="">Select an order item</option>
-        <option value="7001">#7001 &middot; Order 3001 &middot; JKT-204</option>
-        <option value="7002">#7002 &middot; Order 3001 &middot; BNE-055</option>
-        <option value="7003">#7003 &middot; Order 3002 &middot; HDY-118</option>
-        <option value="7004">#7004 &middot; Order 3003 &middot; JNS-310</option>
-        <option value="7005">#7005 &middot; Order 3004 &middot; JKT-204</option>
-    </select>
+<form action="/orderitems" method="POST" class="form-card">
+    <div class="field">
+        <label for="update_order_item_id">Order item to update</label>
+        <select name="order_item_id" id="update_order_item_id">
+            <option value="">Select an order item</option>
+            {{#each orderitems}}
+            <option value="{{this.order_item_id}}">#{{this.order_item_id}} &middot; Order {{this.order_id}} &middot; {{this.sku}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_inventory_id">Inventory item:</label>
-    <select name="inventory_id" id="update_inventory_id">
-        <option value="101">JKT-204 &middot; Columbia Rain Jacket</option>
-        <option value="102">JNS-310 &middot; Levi's Jeans</option>
-        <option value="103">HDY-118 &middot; Carhartt Hoodie</option>
-        <option value="104">BNE-055 &middot; Patagonia Beanie</option>
-    </select>
+    <div class="field">
+        <label for="update_order_id">Order</label>
+        <select name="order_id" id="update_order_id">
+            {{#each orders}}
+            <option value="{{this.order_id}}">#{{this.order_id}} &middot; {{this.customer_first_name}} {{this.customer_last_name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_quantity">Quantity:</label>
-    <input type="number" name="quantity" id="update_quantity" min="1">
+    <div class="field">
+        <label for="update_inventory_id">Inventory item</label>
+        <select name="inventory_id" id="update_inventory_id">
+            {{#each inventory}}
+            <option value="{{this.inventory_id}}">{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_discount_percent">Discount percent:</label>
-    <input type="number" name="discount_percent" id="update_discount_percent" step="0.01" min="0">
+    <div class="field">
+        <label for="update_quantity">Quantity</label>
+        <input type="number" name="quantity" id="update_quantity" min="1">
+    </div>
 
-    <label for="update_selling_price">Selling price:</label>
-    <input type="number" name="selling_price" id="update_selling_price" step="0.01" min="0">
+    <div class="field">
+        <label for="update_discount_percent">Discount percent</label>
+        <input type="number" name="discount_percent" id="update_discount_percent" step="0.01" min="0">
+    </div>
 
-    <label for="update_shipped">Shipped:</label>
-    <select name="shipped" id="update_shipped">
-        <option value="">N/A</option>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-    </select>
+    <div class="field">
+        <label for="update_selling_price">Selling price</label>
+        <input type="number" name="selling_price" id="update_selling_price" step="0.01" min="0">
+    </div>
 
-    <label for="update_shipping_date">Shipping date:</label>
-    <input type="date" name="shipping_date" id="update_shipping_date">
+    <div class="field">
+        <label for="update_shipped">Shipped</label>
+        <select name="shipped" id="update_shipped">
+            <option value="">N/A</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
 
     <input type="submit" value="Submit">
 </form>
+
+<script>
+    const orderItemRecords = {{{json orderitems}}};
+
+    document.getElementById('update_order_item_id').addEventListener('change', function () {
+        const record = orderItemRecords.find(o => String(o.order_item_id) === this.value);
+        const fields = [
+            'order_id', 'inventory_id', 'quantity',
+            'discount_percent', 'selling_price', 'shipped'
+        ];
+        fields.forEach(function (field) {
+            document.getElementById('update_' + field).value = record ? (record[field] ?? '') : '';
+        });
+    });
+</script>
