@@ -2,10 +2,12 @@
   "name": "cs340_final-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "app.js",
+"scripts": {
+  "start": "node app.js",
+  "production": "forever start app.js",
+  "stop_production": "forever stop app.js"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abhijeet6singh/CS340_Final-Project.git"
