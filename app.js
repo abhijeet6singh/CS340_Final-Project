@@ -461,6 +461,75 @@ app.post('/distributors/delete', async function (req, res) {
 });
 
 
+// Orders CREATE operation
+app.post('/orders/create', async function (req, res) {
+    try {
+        const {
+            customer_id,
+            order_date,
+            payment_method,
+            payment_last_four,
+            order_complete,
+            pickup_or_ship
+        } = req.body;
+
+        await db.query(
+            'CALL sp_create_order(?, ?, ?, ?, ?, ?);',
+            [
+                customer_id,
+                order_date,
+                payment_method,
+                payment_last_four,
+                order_complete,
+                pickup_or_ship
+            ]
+        );
+
+        res.redirect('/orders');
+    } catch (error) {
+        console.error('Error creating order:', error);
+        res.status(500).send('An error occurred while creating the order.');
+    }
+});
+
+
+// Orders UPDATE operation
+app.post('/orders/update', async function (req, res) {
+    try {
+        const {
+            order_id,
+            order_complete,
+            pickup_or_ship
+        } = req.body;
+
+        await db.query(
+            'CALL sp_update_order(?, ?, ?);',
+            [order_id, order_complete, pickup_or_ship]
+        );
+
+        res.redirect('/orders');
+    } catch (error) {
+        console.error('Error updating order:', error);
+        res.status(500).send('An error occurred while updating the order.');
+    }
+});
+
+
+// Orders DELETE operation
+app.post('/orders/delete', async function (req, res) {
+    try {
+        const orderID = req.body.order_id;
+
+        await db.query('CALL sp_delete_order(?);', [orderID]);
+
+        res.redirect('/orders');
+    } catch (error) {
+        console.error('Error deleting order:', error);
+        res.status(500).send('An error occurred while deleting the order.');
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.');
 });

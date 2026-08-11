@@ -396,3 +396,86 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- CREATE Order
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_create_order;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_create_order(
+    IN p_customer_id INT,
+    IN p_order_date DATE,
+    IN p_payment_method VARCHAR(50),
+    IN p_payment_last_four CHAR(4),
+    IN p_order_complete TINYINT,
+    IN p_pickup_or_ship VARCHAR(20)
+)
+COMMENT 'Creates a new customer order.'
+BEGIN
+    INSERT INTO Orders (
+        customer_id,
+        order_date,
+        payment_method,
+        payment_last_four,
+        order_complete,
+        pickup_or_ship
+    )
+    VALUES (
+        p_customer_id,
+        p_order_date,
+        p_payment_method,
+        p_payment_last_four,
+        p_order_complete,
+        p_pickup_or_ship
+    );
+END //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- UPDATE Order
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_update_order;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_update_order(
+    IN p_order_id INT,
+    IN p_order_complete TINYINT,
+    IN p_pickup_or_ship VARCHAR(20)
+)
+COMMENT 'Updates order status and pickup or shipping choice.'
+BEGIN
+    UPDATE Orders
+    SET order_complete = p_order_complete,
+        pickup_or_ship = p_pickup_or_ship
+    WHERE order_id = p_order_id;
+END //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- DELETE Order
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_delete_order;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_delete_order(IN p_order_id INT)
+COMMENT 'Deletes an order and its order item rows.'
+BEGIN
+    DELETE FROM OrderItems
+    WHERE order_id = p_order_id;
+
+    DELETE FROM Orders
+    WHERE order_id = p_order_id;
+END //
+
+DELIMITER ;
