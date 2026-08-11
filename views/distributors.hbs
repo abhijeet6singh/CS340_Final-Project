@@ -23,13 +23,18 @@
         <td>{{this.distributor_zip}}</td>
         <td>{{this.distributor_phone}}</td>
         <td>{{this.distributor_contact_person}}</td>
-        <td><button>Delete</button></td>
+        <td>
+            <form style="display:inline" method="POST" action="/distributors/delete">
+                <input type="hidden" name="distributor_id" value="{{this.distributor_id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {{/each}} 
 </table>
 
 <h2>Create a distributor</h2>
-<form>
+<form method="POST" action="/distributors/create">
     <label for="distributor_name">Distributor name:</label>
     <input type="text" name="distributor_name" id="distributor_name">
 
@@ -55,7 +60,7 @@
 </form>
 
 <h2>Update a distributor</h2>
-<form>
+<form method="POST" action="/distributors/update">
     <label for="update_distributor_id">Distributor to update:</label>
     <select name="distributor_id" id="update_distributor_id">
         <option value="">Select a distributor</option>

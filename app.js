@@ -376,6 +376,91 @@ app.post('/customers/delete', async function (req, res) {
 });
 
 
+// Distributors CREATE operation
+app.post('/distributors/create', async function (req, res) {
+    try {
+        const {
+            distributor_name,
+            distributor_street,
+            distributor_city,
+            distributor_state,
+            distributor_zip,
+            distributor_phone,
+            distributor_contact_person
+        } = req.body;
+
+        await db.query(
+            'CALL sp_create_distributor(?, ?, ?, ?, ?, ?, ?);',
+            [
+                distributor_name,
+                distributor_street,
+                distributor_city,
+                distributor_state,
+                distributor_zip,
+                distributor_phone,
+                distributor_contact_person
+            ]
+        );
+
+        res.redirect('/distributors');
+    } catch (error) {
+        console.error('Error creating distributor:', error);
+        res.status(500).send('An error occurred while creating the distributor.');
+    }
+});
+
+
+// Distributors UPDATE operation
+app.post('/distributors/update', async function (req, res) {
+    try {
+        const {
+            distributor_id,
+            distributor_name,
+            distributor_street,
+            distributor_city,
+            distributor_state,
+            distributor_zip,
+            distributor_phone,
+            distributor_contact_person
+        } = req.body;
+
+        await db.query(
+            'CALL sp_update_distributor(?, ?, ?, ?, ?, ?, ?, ?);',
+            [
+                distributor_id,
+                distributor_name,
+                distributor_street,
+                distributor_city,
+                distributor_state,
+                distributor_zip,
+                distributor_phone,
+                distributor_contact_person
+            ]
+        );
+
+        res.redirect('/distributors');
+    } catch (error) {
+        console.error('Error updating distributor:', error);
+        res.status(500).send('An error occurred while updating the distributor.');
+    }
+});
+
+
+// Distributors DELETE operation
+app.post('/distributors/delete', async function (req, res) {
+    try {
+        const distributorID = req.body.distributor_id;
+
+        await db.query('CALL sp_delete_distributor(?);', [distributorID]);
+
+        res.redirect('/distributors');
+    } catch (error) {
+        console.error('Error deleting distributor:', error);
+        res.status(500).send('An error occurred while deleting the distributor.');
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.');
 });

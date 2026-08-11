@@ -293,3 +293,106 @@ BEGIN
 END //
 
 DELIMITER ;
+
+-- -----------------------------------------------------
+-- CREATE Distributor
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_create_distributor;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_create_distributor(
+    IN p_distributor_name VARCHAR(100),
+    IN p_distributor_street VARCHAR(100),
+    IN p_distributor_city VARCHAR(50),
+    IN p_distributor_state CHAR(2),
+    IN p_distributor_zip VARCHAR(10),
+    IN p_distributor_phone VARCHAR(20),
+    IN p_distributor_contact_person VARCHAR(100)
+)
+COMMENT 'Creates a new distributor.'
+BEGIN
+    INSERT INTO Distributors (
+        distributor_name,
+        distributor_street,
+        distributor_city,
+        distributor_state,
+        distributor_zip,
+        distributor_phone,
+        distributor_contact_person
+    )
+    VALUES (
+        p_distributor_name,
+        p_distributor_street,
+        p_distributor_city,
+        p_distributor_state,
+        p_distributor_zip,
+        p_distributor_phone,
+        p_distributor_contact_person
+    );
+END //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- UPDATE Distributor
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_update_distributor;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_update_distributor(
+    IN p_distributor_id INT,
+    IN p_distributor_name VARCHAR(100),
+    IN p_distributor_street VARCHAR(100),
+    IN p_distributor_city VARCHAR(50),
+    IN p_distributor_state CHAR(2),
+    IN p_distributor_zip VARCHAR(10),
+    IN p_distributor_phone VARCHAR(20),
+    IN p_distributor_contact_person VARCHAR(100)
+)
+COMMENT 'Updates an existing distributor.'
+BEGIN
+    UPDATE Distributors
+    SET distributor_name = p_distributor_name,
+        distributor_street = p_distributor_street,
+        distributor_city = p_distributor_city,
+        distributor_state = p_distributor_state,
+        distributor_zip = p_distributor_zip,
+        distributor_phone = p_distributor_phone,
+        distributor_contact_person = p_distributor_contact_person
+    WHERE distributor_id = p_distributor_id;
+END //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- DELETE Distributor
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_delete_distributor;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_delete_distributor(IN p_distributor_id INT)
+COMMENT 'Deletes a distributor and related purchase records.'
+BEGIN
+    DELETE FROM PurchaseItems
+    WHERE purchase_id IN (
+        SELECT purchase_id
+        FROM Purchases
+        WHERE distributor_id = p_distributor_id
+    );
+
+    DELETE FROM Purchases
+    WHERE distributor_id = p_distributor_id;
+
+    DELETE FROM Distributors
+    WHERE distributor_id = p_distributor_id;
+END //
+
+DELIMITER ;
