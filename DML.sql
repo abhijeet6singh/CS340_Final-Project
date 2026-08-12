@@ -460,6 +460,8 @@ CALL sp_create_order(
 -- Update an existing order from the Orders update form
 CALL sp_update_order(
     @orderID,
+    @paymentMethod,
+    @paymentLastFour,
     @orderComplete,
     @pickupOrShip
 );
@@ -496,6 +498,7 @@ CALL sp_create_purchaseitem(
 -- Update an existing purchase item from the PurchaseItems update form
 CALL sp_update_purchaseitem(
     @purchaseItemID,
+    @purchaseID,
     @inventoryID,
     @quantityPurchased,
     @pricePaid
