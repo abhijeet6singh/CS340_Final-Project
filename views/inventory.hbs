@@ -32,7 +32,7 @@
 </table>
 
 <h2>Create an inventory item</h2>
-<form action="/inventory" method="POST" class="form-card">
+<form action="/inventory/create" method="POST" class="form-card">
     <div class="field">
         <label for="sku">SKU</label>
         <input type="text" name="sku" id="sku">
@@ -72,7 +72,7 @@
 </form>
 
 <h2>Update an inventory item</h2>
-<form action="/inventory" method="POST" class="form-card">
+<form action="/inventory/update" method="POST" class="form-card">
     <div class="field">
         <label for="update_inventory_id">Inventory item to update</label>
         <select name="inventory_id" id="update_inventory_id">

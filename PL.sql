@@ -142,11 +142,11 @@ DELIMITER ;
 -- ============================================================
 
 DROP PROCEDURE IF EXISTS sp_update_orderitem;
-
 DELIMITER //
 
 CREATE PROCEDURE sp_update_orderitem(
     IN p_order_item_id INT,
+    IN p_order_id INT,
     IN p_inventory_id INT,
     IN p_quantity INT,
     IN p_discount_percent DECIMAL(5,2),
@@ -154,10 +154,11 @@ CREATE PROCEDURE sp_update_orderitem(
     IN p_shipped TINYINT,
     IN p_shipping_date DATE
 )
-COMMENT 'Updates an OrderItems row, including inventory_id for the M:N relationship.'
+COMMENT 'Updates an order item.'
 BEGIN
     UPDATE OrderItems
-    SET inventory_id = p_inventory_id,
+    SET order_id = p_order_id,
+        inventory_id = p_inventory_id,
         quantity = p_quantity,
         discount_percent = p_discount_percent,
         selling_price = p_selling_price,
@@ -446,13 +447,17 @@ DELIMITER //
 
 CREATE PROCEDURE sp_update_order(
     IN p_order_id INT,
+    IN p_payment_method VARCHAR(20),
+    IN p_payment_last_four VARCHAR(4),
     IN p_order_complete TINYINT,
     IN p_pickup_or_ship VARCHAR(20)
 )
-COMMENT 'Updates order status and pickup or shipping choice.'
+COMMENT 'Updates an existing order.'
 BEGIN
     UPDATE Orders
-    SET order_complete = p_order_complete,
+    SET payment_method = p_payment_method,
+        payment_last_four = p_payment_last_four,
+        order_complete = p_order_complete,
         pickup_or_ship = p_pickup_or_ship
     WHERE order_id = p_order_id;
 END //
@@ -594,6 +599,7 @@ DELIMITER //
 
 CREATE PROCEDURE sp_update_purchaseitem(
     IN p_purchase_item_id INT,
+    IN p_purchase_id INT,
     IN p_inventory_id INT,
     IN p_quantity_purchased INT,
     IN p_price_paid DECIMAL(10,2)
@@ -601,7 +607,8 @@ CREATE PROCEDURE sp_update_purchaseitem(
 COMMENT 'Updates an existing purchase item.'
 BEGIN
     UPDATE PurchaseItems
-    SET inventory_id = p_inventory_id,
+    SET purchase_id = p_purchase_id,
+        inventory_id = p_inventory_id,
         quantity_purchased = p_quantity_purchased,
         price_paid = p_price_paid
     WHERE purchase_item_id = p_purchase_item_id;

@@ -334,6 +334,7 @@ app.post('/orderitems/update', async function (req, res) {
     try {
         const {
             order_item_id,
+            order_id,
             inventory_id,
             quantity,
             discount_percent,
@@ -346,8 +347,17 @@ app.post('/orderitems/update', async function (req, res) {
         const shippingDateValue = shipping_date === '' ? null : shipping_date;
 
         await db.query(
-            'CALL sp_update_orderitem(?, ?, ?, ?, ?, ?, ?);',
-            [order_item_id, inventory_id, quantity, discount_percent, selling_price, shippedValue, shippingDateValue]
+            'CALL sp_update_orderitem(?, ?, ?, ?, ?, ?, ?, ?);',
+            [
+                order_item_id,
+                order_id,
+                inventory_id,
+                quantity,
+                discount_percent,
+                selling_price,
+                shippedValue,
+                shippingDateValue
+            ]
         );
 
         res.redirect('/orderitems');
@@ -584,13 +594,21 @@ app.post('/orders/update', async function (req, res) {
     try {
         const {
             order_id,
+            payment_method,
+            payment_last_four,
             order_complete,
             pickup_or_ship
         } = req.body;
 
         await db.query(
-            'CALL sp_update_order(?, ?, ?);',
-            [order_id, order_complete, pickup_or_ship]
+            'CALL sp_update_order(?, ?, ?, ?, ?);',
+            [
+                order_id,
+                payment_method,
+                payment_last_four,
+                order_complete,
+                pickup_or_ship
+            ]
         );
 
         res.redirect('/orders');
@@ -701,14 +719,21 @@ app.post('/purchaseitems/update', async function (req, res) {
     try {
         const {
             purchase_item_id,
+            purchase_id,
             inventory_id,
             quantity_purchased,
             price_paid
         } = req.body;
 
         await db.query(
-            'CALL sp_update_purchaseitem(?, ?, ?, ?);',
-            [purchase_item_id, inventory_id, quantity_purchased, price_paid]
+            'CALL sp_update_purchaseitem(?, ?, ?, ?, ?);',
+            [
+                purchase_item_id,
+                purchase_id,
+                inventory_id,
+                quantity_purchased,
+                price_paid
+            ]
         );
 
         res.redirect('/purchaseitems');
