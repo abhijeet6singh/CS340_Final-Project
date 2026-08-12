@@ -261,3 +261,22 @@ h2 {
     color: #0c447c;
 }
 
+.home-hero .entity-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(6px);
+}
+
+.home-hero .entity-card:hover {
+    background: rgba(181, 212, 244, 0.85);
+}
+
+.home-hero {
+    background-image: url('/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 32px;
+    margin: -24px -28px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+git status
