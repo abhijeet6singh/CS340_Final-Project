@@ -55,6 +55,11 @@
     </div>
 
     <div class="field">
+        <label for="update_purchase_date">Purchase date</label>
+        <input type="date" name="purchase_date" id="update_purchase_date">
+    </div>
+
+    <div class="field">
         <label for="update_distributor_id">Distributor</label>
         <select name="distributor_id" id="update_distributor_id">
             {{#each distributors}}
@@ -71,6 +76,8 @@
 
     document.getElementById('update_purchase_id').addEventListener('change', function () {
         const record = purchaseRecords.find(p => String(p.purchase_id) === this.value);
+
+        document.getElementById('update_purchase_date').value = record ? (record.purchase_date || '') : '';
         document.getElementById('update_distributor_id').value = record ? (record.distributor_id ?? '') : '';
     });
 </script>
