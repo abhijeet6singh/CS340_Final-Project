@@ -321,6 +321,7 @@ app.post('/orderitems/update', async function (req, res) {
     try {
         const {
             order_item_id,
+            order_id,
             inventory_id,
             quantity,
             discount_percent,
@@ -333,8 +334,17 @@ app.post('/orderitems/update', async function (req, res) {
         const shippingDateValue = shipping_date === '' ? null : shipping_date;
 
         await db.query(
-            'CALL sp_update_orderitem(?, ?, ?, ?, ?, ?, ?);',
-            [order_item_id, inventory_id, quantity, discount_percent, selling_price, shippedValue, shippingDateValue]
+            'CALL sp_update_orderitem(?, ?, ?, ?, ?, ?, ?, ?);',
+            [
+                order_item_id,
+                order_id,
+                inventory_id,
+                quantity,
+                discount_percent,
+                selling_price,
+                shippedValue,
+                shippingDateValue
+            ]
         );
 
         res.redirect('/orderitems');

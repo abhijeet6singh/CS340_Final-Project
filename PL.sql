@@ -142,11 +142,11 @@ DELIMITER ;
 -- ============================================================
 
 DROP PROCEDURE IF EXISTS sp_update_orderitem;
-
 DELIMITER //
 
 CREATE PROCEDURE sp_update_orderitem(
     IN p_order_item_id INT,
+    IN p_order_id INT,
     IN p_inventory_id INT,
     IN p_quantity INT,
     IN p_discount_percent DECIMAL(5,2),
@@ -154,10 +154,11 @@ CREATE PROCEDURE sp_update_orderitem(
     IN p_shipped TINYINT,
     IN p_shipping_date DATE
 )
-COMMENT 'Updates an OrderItems row, including inventory_id for the M:N relationship.'
+COMMENT 'Updates an order item.'
 BEGIN
     UPDATE OrderItems
-    SET inventory_id = p_inventory_id,
+    SET order_id = p_order_id,
+        inventory_id = p_inventory_id,
         quantity = p_quantity,
         discount_percent = p_discount_percent,
         selling_price = p_selling_price,

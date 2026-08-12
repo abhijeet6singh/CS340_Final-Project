@@ -139,6 +139,11 @@
         </select>
     </div>
 
+    <div class="field">
+        <label for="update_shipping_date">Shipping date</label>
+        <input type="date" name="shipping_date" id="update_shipping_date">
+    </div>
+
     <input type="submit" value="Submit">
 </form>
 
@@ -149,7 +154,8 @@
         const record = orderItemRecords.find(o => String(o.order_item_id) === this.value);
         const fields = [
             'order_id', 'inventory_id', 'quantity',
-            'discount_percent', 'selling_price', 'shipped'
+            'discount_percent', 'selling_price', 'shipped', 
+            'shipping_date'
         ];
         fields.forEach(function (field) {
             document.getElementById('update_' + field).value = record ? (record[field] ?? '') : '';

@@ -379,6 +379,7 @@ CALL sp_create_orderitem(
 -- Update an OrderItems row. Changing inventory_id updates the M:N relationship.
 CALL sp_update_orderitem(
     @orderItemID,
+    @orderID,
     @inventoryID,
     @quantity,
     @discountPercent,
