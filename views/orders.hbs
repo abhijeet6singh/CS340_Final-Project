@@ -16,7 +16,7 @@
     <tr>
         <td>{{this.order_id}}</td>
         <td>{{this.customer_first_name}} {{this.customer_last_name}}</td>
-        <td>{{this.order_date}}</td>
+        <td>{{formatDate this.order_date}}</td>
         <td>{{this.payment_method}}</td>
         <td>{{this.payment_last_four}}</td>
         <td>{{this.order_complete}}</td>
@@ -36,6 +36,7 @@
     <div class="field">
         <label for="customer_id">Customer</label>
         <select name="customer_id" id="customer_id">
+            <option value="">Select a customer</option>
             {{#each customers}}
             <option value="{{this.customer_id}}">{{this.customer_first_name}} {{this.customer_last_name}}</option>
             {{/each}}
@@ -50,6 +51,7 @@
     <div class="field">
         <label for="payment_method">Payment method</label>
         <select name="payment_method" id="payment_method">
+            <option value=""></option>
             <option value="credit">Credit</option>
             <option value="debit">Debit</option>
             <option value="cash">Cash</option>
@@ -64,6 +66,7 @@
     <div class="field">
         <label for="order_complete">Complete</label>
         <select name="order_complete" id="order_complete">
+            <option value=""></option>
             <option value="0">No</option>
             <option value="1">Yes</option>
         </select>
@@ -72,6 +75,7 @@
     <div class="field">
         <label for="pickup_or_ship">Pickup or ship</label>
         <select name="pickup_or_ship" id="pickup_or_ship">
+            <option value=""></option>
             <option value="pickup">Pickup</option>
             <option value="ship">Ship</option>
         </select>
@@ -95,6 +99,7 @@
     <div class="field">
         <label for="update_payment_method">Payment method</label>
         <select name="payment_method" id="update_payment_method">
+            <option value=""></option>
             <option value="credit">Credit</option>
             <option value="debit">Debit</option>
             <option value="cash">Cash</option>
@@ -109,6 +114,7 @@
     <div class="field">
         <label for="update_order_complete">Complete</label>
         <select name="order_complete" id="update_order_complete">
+            <option value=""></option>
             <option value="0">No</option>
             <option value="1">Yes</option>
         </select>
@@ -117,6 +123,7 @@
     <div class="field">
         <label for="update_pickup_or_ship">Pickup or ship</label>
         <select name="pickup_or_ship" id="update_pickup_or_ship">
+            <option value=""></option>
             <option value="pickup">Pickup</option>
             <option value="ship">Ship</option>
         </select>

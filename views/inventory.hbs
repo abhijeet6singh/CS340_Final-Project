@@ -51,6 +51,7 @@
     <div class="field">
         <label for="distributor_id">Distributor</label>
         <select name="distributor_id" id="distributor_id">
+            <option value=""></option>
             {{#each distributors}}
             <option value="{{this.distributor_id}}">{{this.distributor_name}}</option>
             {{/each}}
@@ -100,6 +101,7 @@
     <div class="field">
         <label for="update_distributor_id">Distributor</label>
         <select name="distributor_id" id="update_distributor_id">
+            <option value=""></option>
             {{#each distributors}}
             <option value="{{this.distributor_id}}">{{this.distributor_name}}</option>
             {{/each}}
