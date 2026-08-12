@@ -36,7 +36,7 @@
 </table>
 
 <h2>Create a customer</h2>
-<form action="/customers/create" method="POST" class="form-card">
+<form action="/customers" method="POST" class="form-card">
     <div class="field">
         <label for="customer_first_name">First name</label>
         <input type="text" name="customer_first_name" id="customer_first_name">
@@ -86,7 +86,7 @@
 </form>
 
 <h2>Update a customer</h2>
-<form action="/customers/update" method="POST" class="form-card">
+<form action="/customers" method="POST" class="form-card">
     <div class="field">
         <label for="update_customer_id">Customer to update</label>
         <select name="customer_id" id="update_customer_id">
@@ -120,7 +120,7 @@
     <div class="field">
         <label for="update_customer_state">State</label>
         <select name="customer_state" id="update_customer_state">
-            <option value=""></option>
+            <option value="">Select a state</option>
             {{#each states}}
             <option value="{{this}}">{{this}}</option>
             {{/each}}
