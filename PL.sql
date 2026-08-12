@@ -3,7 +3,7 @@
 -- Group Number: 15
 -- Project Title: Peak Apparel Co. Inventory Management System
 
--- This file contains procedures for Inventory and OrderItems CUD Operations.
+-- This file contains procedures all CUD Operations.
 -- It contains procedures like "CREATE" "UPDATE" and "DELETE".
 
 -- ============================================================
@@ -547,6 +547,82 @@ BEGIN
 
     DELETE FROM Purchases
     WHERE purchase_id = p_purchase_id;
+END //
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- CREATE PurchaseItem
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_create_purchaseitem;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_create_purchaseitem(
+    IN p_purchase_id INT,
+    IN p_inventory_id INT,
+    IN p_quantity_purchased INT,
+    IN p_price_paid DECIMAL(10,2)
+)
+COMMENT 'Creates a new purchase item.'
+BEGIN
+    INSERT INTO PurchaseItems (
+        purchase_id,
+        inventory_id,
+        quantity_purchased,
+        price_paid
+    )
+    VALUES (
+        p_purchase_id,
+        p_inventory_id,
+        p_quantity_purchased,
+        p_price_paid
+    );
+END //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- UPDATE PurchaseItem
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_update_purchaseitem;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_update_purchaseitem(
+    IN p_purchase_item_id INT,
+    IN p_inventory_id INT,
+    IN p_quantity_purchased INT,
+    IN p_price_paid DECIMAL(10,2)
+)
+COMMENT 'Updates an existing purchase item.'
+BEGIN
+    UPDATE PurchaseItems
+    SET inventory_id = p_inventory_id,
+        quantity_purchased = p_quantity_purchased,
+        price_paid = p_price_paid
+    WHERE purchase_item_id = p_purchase_item_id;
+END //
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- DELETE PurchaseItem
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS sp_delete_purchaseitem;
+
+DELIMITER //
+
+CREATE PROCEDURE sp_delete_purchaseitem(IN p_purchase_item_id INT)
+COMMENT 'Deletes one purchase item row.'
+BEGIN
+    DELETE FROM PurchaseItems
+    WHERE purchase_item_id = p_purchase_item_id;
 END //
 
 DELIMITER ;
