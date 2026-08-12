@@ -390,5 +390,118 @@ CALL sp_update_orderitem(
 -- Delete a product from an order in the OrderItems intersection table
 CALL sp_delete_orderitem(@orderItemID);
 
+-- Add a new customer from the Customers create form
+CALL sp_create_customer(
+    @firstName,
+    @lastName,
+    @street,
+    @city,
+    @state,
+    @zip,
+    @phone,
+    @email
+);
+
+-- Update an existing customer from the Customers update form
+CALL sp_update_customer(
+    @customerID,
+    @firstName,
+    @lastName,
+    @street,
+    @city,
+    @state,
+    @zip,
+    @phone,
+    @email
+);
+
+-- Delete a customer selected from the Customers table
+CALL sp_delete_customer(@customerID);
+
+
+-- Add a new distributor from the Distributors create form
+CALL sp_create_distributor(
+    @distributorName,
+    @street,
+    @city,
+    @state,
+    @zip,
+    @phone,
+    @contactPerson
+);
+
+-- Update an existing distributor from the Distributors update form
+CALL sp_update_distributor(
+    @distributorID,
+    @distributorName,
+    @street,
+    @city,
+    @state,
+    @zip,
+    @phone,
+    @contactPerson
+);
+
+-- Delete a distributor selected from the Distributors table
+CALL sp_delete_distributor(@distributorID);
+
+
+-- Add a new order from the Orders create form
+CALL sp_create_order(
+    @customerID,
+    @orderDate,
+    @paymentMethod,
+    @paymentLastFour,
+    @orderComplete,
+    @pickupOrShip
+);
+
+-- Update an existing order from the Orders update form
+CALL sp_update_order(
+    @orderID,
+    @orderComplete,
+    @pickupOrShip
+);
+
+-- Delete an order selected from the Orders table
+CALL sp_delete_order(@orderID);
+
+
+-- Add a new purchase from the Purchases create form
+CALL sp_create_purchase(
+    @purchaseDate,
+    @distributorID
+);
+
+-- Update an existing purchase from the Purchases update form
+CALL sp_update_purchase(
+    @purchaseID,
+    @purchaseDate,
+    @distributorID
+);
+
+-- Delete a purchase selected from the Purchases table
+CALL sp_delete_purchase(@purchaseID);
+
+
+-- Add a new purchase item from the PurchaseItems create form
+CALL sp_create_purchaseitem(
+    @purchaseID,
+    @inventoryID,
+    @quantityPurchased,
+    @pricePaid
+);
+
+-- Update an existing purchase item from the PurchaseItems update form
+CALL sp_update_purchaseitem(
+    @purchaseItemID,
+    @inventoryID,
+    @quantityPurchased,
+    @pricePaid
+);
+
+-- Delete a purchase item selected from the PurchaseItems table
+CALL sp_delete_purchaseitem(@purchaseItemID);
+
 -- Reset the database back to the sample data
 CALL sp_load_peakapparel();
