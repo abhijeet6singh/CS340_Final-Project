@@ -16,9 +16,22 @@ app.engine('.hbs', engine({
     extname: '.hbs',
     helpers: {
         eq: (a, b) => a === b,
-        json: (context) => JSON.stringify(context)
+        json: (context) => JSON.stringify(context),
+        formatDate: (value) => {
+            if (!value) return '';
+            return new Date(value).toLocaleDateString('en-US', {
+                month: '2-digit',
+                day: '2-digit',
+                year: 'numeric'
+            });
+        },
+        dateInput: (value) => {
+            if (!value) return '';
+            return new Date(value).toISOString().slice(0, 10);
+        }
     }
 }));
+        
 app.set('view engine', '.hbs');
 app.set('views', './views');
 
@@ -37,7 +50,7 @@ app.get('/customers', async function (req, res) {
                        FROM Customers
                        ORDER BY customer_id;`;
         const [customers] = await db.query(query);
-        res.render('customers', { customers: customers,  states: US_STATES, page: 'customers' });
+        res.render('customers', { customers: customers, states: US_STATES, page: 'customers' });
     } catch (error) {
         console.error('Error loading customers:', error);
         res.status(500).send('An error occurred loading customers.');
@@ -146,7 +159,7 @@ app.get('/distributors', async function (req, res) {
                        FROM Distributors
                        ORDER BY distributor_id;`;
         const [distributors] = await db.query(query);
-        res.render('distributors', { distributors: distributors,  states: US_STATES, page: 'distributors' });
+        res.render('distributors', { distributors: distributors, states: US_STATES, page: 'distributors' });
     } catch (error) {
         console.error('Error loading distributors:', error);
         res.status(500).send('An error occurred loading distributors.');
@@ -724,4 +737,3 @@ app.post('/purchaseitems/delete', async function (req, res) {
 app.listen(PORT, () => {
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.');
 });
-

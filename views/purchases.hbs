@@ -11,7 +11,7 @@
     {{#each purchases}}
     <tr>
         <td>{{this.purchase_id}}</td>
-        <td>{{this.purchase_date}}</td>
+        <td>{{formatDate this.purchase_date}}</td>
         <td>{{this.distributor_name}}</td>
         <td>
             <form style="display:inline" method="POST" action="/purchases/delete">
@@ -26,13 +26,14 @@
 <h2>Create a purchase</h2>
 <form action="/purchases" method="POST" class="form-card">
     <div class="field">
-        <label for="purchase_date">Purchase date</label>
-        <input type="date" name="purchase_date" id="purchase_date">
+        <label for="update_purchase_date">Purchase date</label>
+        <input type="date" name="purchase_date" id="update_purchase_date">
     </div>
 
-    <div class="field">
+<div class="field">
         <label for="distributor_id">Distributor</label>
         <select name="distributor_id" id="distributor_id">
+            <option value=""></option>
             {{#each distributors}}
             <option value="{{this.distributor_id}}">{{this.distributor_name}}</option>
             {{/each}}
@@ -54,9 +55,10 @@
         </select>
     </div>
 
-    <div class="field">
+<div class="field">
         <label for="update_distributor_id">Distributor</label>
         <select name="distributor_id" id="update_distributor_id">
+            <option value=""></option>
             {{#each distributors}}
             <option value="{{this.distributor_id}}">{{this.distributor_name}}</option>
             {{/each}}

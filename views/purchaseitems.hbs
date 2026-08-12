@@ -29,9 +29,10 @@
 
 <h2>Create a purchase item</h2>
 <form action="/purchaseitems" method="POST" class="form-card">
-    <div class="field">
+ <div class="field">
         <label for="purchase_id">Purchase</label>
         <select name="purchase_id" id="purchase_id">
+            <option value="">Select a purchase</option>
             {{#each purchases}}
             <option value="{{this.purchase_id}}">#{{this.purchase_id}} &middot; {{this.distributor_name}}</option>
             {{/each}}
@@ -41,6 +42,7 @@
     <div class="field">
         <label for="inventory_id">Inventory item</label>
         <select name="inventory_id" id="inventory_id">
+            <option value=""></option>
             {{#each inventory}}
             <option value="{{this.inventory_id}}">{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</option>
             {{/each}}
@@ -72,9 +74,10 @@
         </select>
     </div>
 
-    <div class="field">
+<div class="field">
         <label for="update_purchase_id">Purchase</label>
         <select name="purchase_id" id="update_purchase_id">
+            <option value=""></option>
             {{#each purchases}}
             <option value="{{this.purchase_id}}">#{{this.purchase_id}} &middot; {{this.distributor_name}}</option>
             {{/each}}
@@ -84,6 +87,7 @@
     <div class="field">
         <label for="update_inventory_id">Inventory item</label>
         <select name="inventory_id" id="update_inventory_id">
+            <option value=""></option>
             {{#each inventory}}
             <option value="{{this.inventory_id}}">{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</option>
             {{/each}}
