@@ -13,7 +13,12 @@
         <td>{{this.purchase_id}}</td>
         <td>{{this.purchase_date}}</td>
         <td>{{this.distributor_name}}</td>
-        <td><button>Delete</button></td>
+        <td>
+            <form style="display:inline" method="POST" action="/purchases/delete">
+                <input type="hidden" name="purchase_id" value="{{this.purchase_id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {{/each}}
 </table>

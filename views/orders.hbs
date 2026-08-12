@@ -21,7 +21,12 @@
         <td>{{this.payment_last_four}}</td>
         <td>{{this.order_complete}}</td>
         <td>{{this.pickup_or_ship}}</td>
-        <td><button>Delete</button></td>
+        <td>
+            <form style="display:inline" method="POST" action="/orders/delete">
+                <input type="hidden" name="order_id" value="{{this.order_id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {{/each}}
 </table>

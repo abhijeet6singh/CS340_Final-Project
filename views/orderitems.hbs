@@ -23,7 +23,12 @@
         <td>{{this.selling_price}}</td>
         <td>{{this.shipped}}</td>
         <td>{{this.shipping_date}}</td>
-        <td><button>Delete</button></td>
+        <td>
+            <form style="display:inline" method="POST" action="/orderitems/delete">
+                <input type="hidden" name="order_item_id" value="{{this.order_item_id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {{/each}}
 </table>

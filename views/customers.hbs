@@ -25,7 +25,12 @@
         <td>{{this.customer_zip}}</td>
         <td>{{this.customer_phone}}</td>
         <td>{{this.customer_email}}</td>
-        <td><button>Delete</button></td>
+        <td>
+            <form style="display:inline" method="POST" action="/customers/delete">
+                <input type="hidden" name="customer_id" value="{{this.customer_id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {{/each}}
 </table>

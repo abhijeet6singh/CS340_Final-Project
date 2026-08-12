@@ -17,7 +17,12 @@
         <td>{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</td>
         <td>{{this.quantity_purchased}}</td>
         <td>{{this.price_paid}}</td>
-        <td><button>Delete</button></td>
+        <td>
+            <form style="display:inline" method="POST" action="/purchaseitems/delete">
+                <input type="hidden" name="purchase_item_id" value="{{this.purchase_item_id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     {{/each}}
 </table>

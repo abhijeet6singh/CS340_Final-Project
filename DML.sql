@@ -1,17 +1,15 @@
--- Project Step 3 Draft
+-- Project Step 5 Final
 -- Group 15
 -- Julie Glass and Abhijeet Singh
 -- Peak Apparel Co. Inventory Management System
 
 -- This file has the SQL queries that will be used later by the website.
--- Anything starting with @ is a value that would come from a form input.
 
 
 -- -----------------------------------------------------
 -- Customers
 -- -----------------------------------------------------
 
--- show all customers so staff can look up customer contact information
 SELECT customer_id, customer_first_name, customer_last_name, customer_street,
        customer_city, customer_state, customer_zip, customer_phone, customer_email
 FROM Customers;
@@ -59,7 +57,6 @@ WHERE customer_id = @customerID;
 -- Distributors
 -- -----------------------------------------------------
 
--- show all distributors so staff can see the companies that supply inventory
 SELECT distributor_id, distributor_name, distributor_street, distributor_city,
        distributor_state, distributor_zip, distributor_phone,
        distributor_contact_person
@@ -105,7 +102,6 @@ WHERE distributor_id = @distributorID;
 -- Inventory
 -- -----------------------------------------------------
 
--- show all inventory items with the distributor name so staff can see who supplies each item
 SELECT Inventory.inventory_id, Inventory.sku, Inventory.inventory_type,
        Inventory.brand_name, Inventory.distributor_id,
        Distributors.distributor_name, Inventory.retail_price,
@@ -155,7 +151,6 @@ WHERE inventory_id = @inventoryID;
 -- Orders
 -- -----------------------------------------------------
 
--- show all orders with customer names so staff can see who placed each order
 SELECT Orders.order_id, Orders.customer_id, Customers.customer_first_name,
        Customers.customer_last_name, Orders.order_date, Orders.payment_method,
        Orders.payment_last_four, Orders.order_complete, Orders.pickup_or_ship
@@ -204,7 +199,6 @@ WHERE order_id = @orderID;
 -- OrderItems
 -- -----------------------------------------------------
 
--- show all items included in customer orders with basic inventory details
 SELECT OrderItems.order_item_id, OrderItems.order_id,
        OrderItems.inventory_id, Inventory.sku, Inventory.inventory_type,
        Inventory.brand_name, OrderItems.quantity,
@@ -216,7 +210,6 @@ INNER JOIN Orders
 INNER JOIN Inventory
     ON OrderItems.inventory_id = Inventory.inventory_id;
 
--- get order options for the order item add and update forms
 SELECT order_id, customer_id, order_date
 FROM Orders;
 
@@ -264,14 +257,12 @@ WHERE order_item_id = @orderItemID;
 -- Purchases
 -- -----------------------------------------------------
 
--- show all purchases with distributor names so staff can see where each purchase came from
 SELECT Purchases.purchase_id, Purchases.purchase_date,
        Purchases.distributor_id, Distributors.distributor_name
 FROM Purchases
 INNER JOIN Distributors
     ON Purchases.distributor_id = Distributors.distributor_id;
 
--- get distributor options for the purchase add and update forms
 SELECT distributor_id, distributor_name
 FROM Distributors;
 
@@ -300,7 +291,6 @@ WHERE purchase_id = @purchaseID;
 -- PurchaseItems
 -- -----------------------------------------------------
 
--- show all inventory items included in purchases with basic item details
 SELECT PurchaseItems.purchase_item_id, PurchaseItems.purchase_id,
        PurchaseItems.inventory_id, Inventory.sku, Inventory.inventory_type,
        Inventory.brand_name, PurchaseItems.quantity_purchased,
@@ -311,7 +301,6 @@ INNER JOIN Purchases
 INNER JOIN Inventory
     ON PurchaseItems.inventory_id = Inventory.inventory_id;
 
--- get purchase options for the purchase item add and update forms
 SELECT Purchases.purchase_id, Purchases.purchase_date,
        Purchases.distributor_id, Distributors.distributor_name
 FROM Purchases
@@ -347,3 +336,172 @@ WHERE purchase_item_id = @purchaseItemID;
 -- delete a purchase item if it was added to the wrong purchase or should be removed
 DELETE FROM PurchaseItems
 WHERE purchase_item_id = @purchaseItemID;
+
+-- ============================================================
+-- Website Procedure Calls
+-- ============================================================
+
+-- Add a new inventory item from the Inventory create form
+CALL sp_create_inventory(
+    @sku,
+    @inventoryType,
+    @brandName,
+    @distributorID,
+    @retailPrice,
+    @quantityInStock
+);
+
+-- Update an existing inventory item from the Inventory update form
+CALL sp_update_inventory(
+    @inventoryID,
+    @sku,
+    @inventoryType,
+    @brandName,
+    @distributorID,
+    @retailPrice,
+    @quantityInStock
+);
+
+-- Delete an inventory item selected from the Inventory table
+CALL sp_delete_inventory(@inventoryID);
+
+-- Add a product to an order in the OrderItems intersection table
+CALL sp_create_orderitem(
+    @orderID,
+    @inventoryID,
+    @quantity,
+    @discountPercent,
+    @sellingPrice,
+    @shipped,
+    @shippingDate
+);
+
+-- Update an OrderItems row. Changing inventory_id updates the M:N relationship.
+CALL sp_update_orderitem(
+    @orderItemID,
+    @inventoryID,
+    @quantity,
+    @discountPercent,
+    @sellingPrice,
+    @shipped,
+    @shippingDate
+);
+
+-- Delete a product from an order in the OrderItems intersection table
+CALL sp_delete_orderitem(@orderItemID);
+
+-- Add a new customer from the Customers create form
+CALL sp_create_customer(
+    @firstName,
+    @lastName,
+    @street,
+    @city,
+    @state,
+    @zip,
+    @phone,
+    @email
+);
+
+-- Update an existing customer from the Customers update form
+CALL sp_update_customer(
+    @customerID,
+    @firstName,
+    @lastName,
+    @street,
+    @city,
+    @state,
+    @zip,
+    @phone,
+    @email
+);
+
+-- Delete a customer selected from the Customers table
+CALL sp_delete_customer(@customerID);
+
+
+-- Add a new distributor from the Distributors create form
+CALL sp_create_distributor(
+    @distributorName,
+    @street,
+    @city,
+    @state,
+    @zip,
+    @phone,
+    @contactPerson
+);
+
+-- Update an existing distributor from the Distributors update form
+CALL sp_update_distributor(
+    @distributorID,
+    @distributorName,
+    @street,
+    @city,
+    @state,
+    @zip,
+    @phone,
+    @contactPerson
+);
+
+-- Delete a distributor selected from the Distributors table
+CALL sp_delete_distributor(@distributorID);
+
+
+-- Add a new order from the Orders create form
+CALL sp_create_order(
+    @customerID,
+    @orderDate,
+    @paymentMethod,
+    @paymentLastFour,
+    @orderComplete,
+    @pickupOrShip
+);
+
+-- Update an existing order from the Orders update form
+CALL sp_update_order(
+    @orderID,
+    @orderComplete,
+    @pickupOrShip
+);
+
+-- Delete an order selected from the Orders table
+CALL sp_delete_order(@orderID);
+
+
+-- Add a new purchase from the Purchases create form
+CALL sp_create_purchase(
+    @purchaseDate,
+    @distributorID
+);
+
+-- Update an existing purchase from the Purchases update form
+CALL sp_update_purchase(
+    @purchaseID,
+    @purchaseDate,
+    @distributorID
+);
+
+-- Delete a purchase selected from the Purchases table
+CALL sp_delete_purchase(@purchaseID);
+
+
+-- Add a new purchase item from the PurchaseItems create form
+CALL sp_create_purchaseitem(
+    @purchaseID,
+    @inventoryID,
+    @quantityPurchased,
+    @pricePaid
+);
+
+-- Update an existing purchase item from the PurchaseItems update form
+CALL sp_update_purchaseitem(
+    @purchaseItemID,
+    @inventoryID,
+    @quantityPurchased,
+    @pricePaid
+);
+
+-- Delete a purchase item selected from the PurchaseItems table
+CALL sp_delete_purchaseitem(@purchaseItemID);
+
+-- Reset the database back to the sample data
+CALL sp_load_peakapparel();
