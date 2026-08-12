@@ -1,7 +1,7 @@
 <h1>Inventory</h1>
 
 <h2>Browse inventory</h2>
-<table border="1" cellpadding="5">
+<table class="data-table">
     <tr>
         <th>ID</th>
         <th>SKU</th>
@@ -28,68 +28,108 @@
             </form>
         </td>
     </tr>
-    {{/each}}   
+    {{/each}}
 </table>
 
 <h2>Create an inventory item</h2>
-<form method="POST" action="/inventory/create">
-    <label for="sku">SKU:</label>
-    <input type="text" name="sku" id="sku">
+<form action="/inventory" method="POST" class="form-card">
+    <div class="field">
+        <label for="sku">SKU</label>
+        <input type="text" name="sku" id="sku">
+    </div>
 
-    <label for="inventory_type">Inventory type:</label>
-    <input type="text" name="inventory_type" id="inventory_type">
+    <div class="field">
+        <label for="inventory_type">Inventory type</label>
+        <input type="text" name="inventory_type" id="inventory_type">
+    </div>
 
-    <label for="brand_name">Brand name:</label>
-    <input type="text" name="brand_name" id="brand_name">
+    <div class="field">
+        <label for="brand_name">Brand name</label>
+        <input type="text" name="brand_name" id="brand_name">
+    </div>
 
-    <label for="distributor_id">Distributor:</label>
-    <select name="distributor_id" id="distributor_id">
-        <option value="1">Cascade Apparel Supply</option>
-        <option value="2">Pacific Garment Wholesale</option>
-        <option value="3">Northwest Outdoor Apparel</option>
-    </select>
+    <div class="field">
+        <label for="distributor_id">Distributor</label>
+        <select name="distributor_id" id="distributor_id">
+            {{#each distributors}}
+            <option value="{{this.distributor_id}}">{{this.distributor_name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="retail_price">Retail price:</label>
-    <input type="number" name="retail_price" id="retail_price" step="0.01" min="0">
+    <div class="field">
+        <label for="retail_price">Retail price</label>
+        <input type="number" name="retail_price" id="retail_price" step="0.01" min="0">
+    </div>
 
-    <label for="quantity_in_stock">Quantity in stock:</label>
-    <input type="number" name="quantity_in_stock" id="quantity_in_stock" min="0">
+    <div class="field">
+        <label for="quantity_in_stock">Quantity in stock</label>
+        <input type="number" name="quantity_in_stock" id="quantity_in_stock" min="0">
+    </div>
 
     <input type="submit" value="Submit">
 </form>
 
 <h2>Update an inventory item</h2>
-<form method="POST" action="/inventory/update">
-    <label for="update_inventory_id">Inventory item to update:</label>
-    <select name="inventory_id" id="update_inventory_id">
-        <option value="">Select an inventory item</option>
-        <option value="101">JKT-204 &middot; Columbia Rain Jacket</option>
-        <option value="102">JNS-310 &middot; Levi's Jeans</option>
-        <option value="103">HDY-118 &middot; Carhartt Hoodie</option>
-        <option value="104">BNE-055 &middot; Patagonia Beanie</option>
-    </select>
+<form action="/inventory" method="POST" class="form-card">
+    <div class="field">
+        <label for="update_inventory_id">Inventory item to update</label>
+        <select name="inventory_id" id="update_inventory_id">
+            <option value="">Select an inventory item</option>
+            {{#each inventory}}
+            <option value="{{this.inventory_id}}">{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_sku">SKU:</label>
-    <input type="text" name="sku" id="update_sku">
+    <div class="field">
+        <label for="update_sku">SKU</label>
+        <input type="text" name="sku" id="update_sku">
+    </div>
 
-    <label for="update_inventory_type">Inventory type:</label>
-    <input type="text" name="inventory_type" id="update_inventory_type">
+    <div class="field">
+        <label for="update_inventory_type">Inventory type</label>
+        <input type="text" name="inventory_type" id="update_inventory_type">
+    </div>
 
-    <label for="update_brand_name">Brand name:</label>
-    <input type="text" name="brand_name" id="update_brand_name">
+    <div class="field">
+        <label for="update_brand_name">Brand name</label>
+        <input type="text" name="brand_name" id="update_brand_name">
+    </div>
 
-    <label for="update_distributor_id">Distributor:</label>
-    <select name="distributor_id" id="update_distributor_id">
-        <option value="1">Cascade Apparel Supply</option>
-        <option value="2">Pacific Garment Wholesale</option>
-        <option value="3">Northwest Outdoor Apparel</option>
-    </select>
+    <div class="field">
+        <label for="update_distributor_id">Distributor</label>
+        <select name="distributor_id" id="update_distributor_id">
+            {{#each distributors}}
+            <option value="{{this.distributor_id}}">{{this.distributor_name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_retail_price">Retail price:</label>
-    <input type="number" name="retail_price" id="update_retail_price" step="0.01" min="0">
+    <div class="field">
+        <label for="update_retail_price">Retail price</label>
+        <input type="number" name="retail_price" id="update_retail_price" step="0.01" min="0">
+    </div>
 
-    <label for="update_quantity_in_stock">Quantity in stock:</label>
-    <input type="number" name="quantity_in_stock" id="update_quantity_in_stock" min="0">
+    <div class="field">
+        <label for="update_quantity_in_stock">Quantity in stock</label>
+        <input type="number" name="quantity_in_stock" id="update_quantity_in_stock" min="0">
+    </div>
 
     <input type="submit" value="Submit">
 </form>
+
+<script>
+    const inventoryRecords = {{{json inventory}}};
+
+    document.getElementById('update_inventory_id').addEventListener('change', function () {
+        const record = inventoryRecords.find(i => String(i.inventory_id) === this.value);
+        const fields = [
+            'sku', 'inventory_type', 'brand_name',
+            'distributor_id', 'retail_price', 'quantity_in_stock'
+        ];
+        fields.forEach(function (field) {
+            document.getElementById('update_' + field).value = record ? (record[field] || '') : '';
+        });
+    });
+</script>

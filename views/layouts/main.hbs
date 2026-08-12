@@ -5,21 +5,30 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div class="nav">
-        Navigation:
-        <a href="/">Home</a>
-        <a href="/customers">Customers</a>
-        <a href="/orders">Orders</a>
-        <a href="/orderitems">Order Items</a>
-        <a href="/inventory">Inventory</a>
-        <a href="/distributors">Distributors</a>
-        <a href="/purchases">Purchases</a>
-        <a href="/purchaseitems">Purchase Items</a>
-        <form action="/reset" method="POST" style="display:inline">
-             <button type="submit">RESET</button>
-        </form>
-    </div>
+    <div class="layout">
+                <nav class="sidebar">
+            <a href="/" class="brand">
+                <span class="brand-name">Peak Apparel Co.</span>
+                <span class="brand-sub">Inventory management</span>
+            </a>
 
-    {{{body}}}
+            <a href="/" class="nav-link">Home</a>
+                <a href="/customers" class="nav-link {{#if (eq page 'customers')}}active{{/if}}">Customers</a>
+                <a href="/orders" class="nav-link {{#if (eq page 'orders')}}active{{/if}}">Orders</a>
+                <a href="/orderitems" class="nav-link {{#if (eq page 'orderitems')}}active{{/if}}">Order items</a>
+                <a href="/inventory" class="nav-link {{#if (eq page 'inventory')}}active{{/if}}">Inventory</a>
+                <a href="/distributors" class="nav-link {{#if (eq page 'distributors')}}active{{/if}}">Distributors</a>
+                <a href="/purchases" class="nav-link {{#if (eq page 'purchases')}}active{{/if}}">Purchases</a>
+                <a href="/purchaseitems" class="nav-link {{#if (eq page 'purchaseitems')}}active{{/if}}">Purchase items</a>
+
+            <form action="/reset" method="POST" class="reset-form">
+                <button type="submit" class="btn-reset">Reset data</button>
+            </form>
+        </nav>
+
+        <main class="content">
+            {{{body}}}
+        </main>
+    </div>
 </body>
 </html>

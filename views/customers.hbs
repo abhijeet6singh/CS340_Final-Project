@@ -1,7 +1,7 @@
 <h1>Customers</h1>
 
 <h2>Browse customers</h2>
-<table border="1" cellpadding="5">
+<table class="data-table">
     <tr>
         <th>ID</th>
         <th>First name</th>
@@ -32,71 +32,131 @@
             </form>
         </td>
     </tr>
-    {{/each}} 
+    {{/each}}
 </table>
 
 <h2>Create a customer</h2>
-<form action="/customers/create" method="POST">
-    <label for="customer_first_name">First name:</label>
-    <input type="text" name="customer_first_name" id="customer_first_name">
+<form action="/customers" method="POST" class="form-card">
+    <div class="field">
+        <label for="customer_first_name">First name</label>
+        <input type="text" name="customer_first_name" id="customer_first_name">
+    </div>
 
-    <label for="customer_last_name">Last name:</label>
-    <input type="text" name="customer_last_name" id="customer_last_name">
+    <div class="field">
+        <label for="customer_last_name">Last name</label>
+        <input type="text" name="customer_last_name" id="customer_last_name">
+    </div>
 
-    <label for="customer_street">Street:</label>
-    <input type="text" name="customer_street" id="customer_street">
+    <div class="field">
+        <label for="customer_street">Street</label>
+        <input type="text" name="customer_street" id="customer_street">
+    </div>
 
-    <label for="customer_city">City:</label>
-    <input type="text" name="customer_city" id="customer_city">
+    <div class="field">
+        <label for="customer_city">City</label>
+        <input type="text" name="customer_city" id="customer_city">
+    </div>
 
-    <label for="customer_state">State:</label>
-    <input type="text" name="customer_state" id="customer_state" maxlength="2">
+    <div class="field">
+        <label for="customer_state">State</label>
+        <select name="customer_state" id="customer_state">
+            <option value="">Select a state</option>
+            {{#each states}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="customer_zip">ZIP:</label>
-    <input type="text" name="customer_zip" id="customer_zip">
+    <div class="field">
+        <label for="customer_zip">ZIP</label>
+        <input type="text" name="customer_zip" id="customer_zip">
+    </div>
 
-    <label for="customer_phone">Phone:</label>
-    <input type="text" name="customer_phone" id="customer_phone">
+    <div class="field">
+        <label for="customer_phone">Phone</label>
+        <input type="text" name="customer_phone" id="customer_phone">
+    </div>
 
-    <label for="customer_email">Email:</label>
-    <input type="email" name="customer_email" id="customer_email">
+    <div class="field">
+        <label for="customer_email">Email</label>
+        <input type="email" name="customer_email" id="customer_email">
+    </div>
 
     <input type="submit" value="Submit">
 </form>
 
 <h2>Update a customer</h2>
-<form action="/customers/update" method="POST">
-    <label for="update_customer_id">Customer to update:</label>
-    <select name="customer_id" id="update_customer_id">
-        <option value="">Select a customer</option>
-        <option value="1">Maya Torres</option>
-        <option value="2">Devon Park</option>
-        <option value="3">Lena Fischer</option>
-    </select>
+<form action="/customers" method="POST" class="form-card">
+    <div class="field">
+        <label for="update_customer_id">Customer to update</label>
+        <select name="customer_id" id="update_customer_id">
+            <option value="">Select a customer</option>
+            {{#each customers}}
+            <option value="{{this.customer_id}}">{{this.customer_first_name}} {{this.customer_last_name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_customer_first_name">First name:</label>
-    <input type="text" name="customer_first_name" id="update_customer_first_name">
+    <div class="field">
+        <label for="update_customer_first_name">First name</label>
+        <input type="text" name="customer_first_name" id="update_customer_first_name">
+    </div>
 
-    <label for="update_customer_last_name">Last name:</label>
-    <input type="text" name="customer_last_name" id="update_customer_last_name">
+    <div class="field">
+        <label for="update_customer_last_name">Last name</label>
+        <input type="text" name="customer_last_name" id="update_customer_last_name">
+    </div>
 
-    <label for="update_customer_street">Street:</label>
-    <input type="text" name="customer_street" id="update_customer_street">
+    <div class="field">
+        <label for="update_customer_street">Street</label>
+        <input type="text" name="customer_street" id="update_customer_street">
+    </div>
 
-    <label for="update_customer_city">City:</label>
-    <input type="text" name="customer_city" id="update_customer_city">
+    <div class="field">
+        <label for="update_customer_city">City</label>
+        <input type="text" name="customer_city" id="update_customer_city">
+    </div>
 
-    <label for="update_customer_state">State:</label>
-    <input type="text" name="customer_state" id="update_customer_state" maxlength="2">
+    <div class="field">
+        <label for="update_customer_state">State</label>
+        <select name="customer_state" id="update_customer_state">
+            <option value="">Select a state</option>
+            {{#each states}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_customer_zip">ZIP:</label>
-    <input type="text" name="customer_zip" id="update_customer_zip">
+    <div class="field">
+        <label for="update_customer_zip">ZIP</label>
+        <input type="text" name="customer_zip" id="update_customer_zip">
+    </div>
 
-    <label for="update_customer_phone">Phone:</label>
-    <input type="text" name="customer_phone" id="update_customer_phone">
+    <div class="field">
+        <label for="update_customer_phone">Phone</label>
+        <input type="text" name="customer_phone" id="update_customer_phone">
+    </div>
 
-    <label for="update_customer_email">Email:</label>
-    <input type="email" name="customer_email" id="update_customer_email">
+    <div class="field">
+        <label for="update_customer_email">Email</label>
+        <input type="email" name="customer_email" id="update_customer_email">
+    </div>
 
     <input type="submit" value="Submit">
 </form>
+
+<script>
+    const customerRecords = {{{json customers}}};
+
+    document.getElementById('update_customer_id').addEventListener('change', function () {
+        const record = customerRecords.find(c => String(c.customer_id) === this.value);
+        const fields = [
+            'customer_first_name', 'customer_last_name', 'customer_street',
+            'customer_city', 'customer_state', 'customer_zip',
+            'customer_phone', 'customer_email'
+        ];
+        fields.forEach(function (field) {
+            document.getElementById('update_' + field).value = record ? (record[field] || '') : '';
+        });
+    });
+</script>

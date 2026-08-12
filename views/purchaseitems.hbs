@@ -1,7 +1,7 @@
 <h1>Purchase Items</h1>
 
 <h2>Browse purchase items</h2>
-<table border="1" cellpadding="5">
+<table class="data-table">
     <tr>
         <th>ID</th>
         <th>Purchase</th>
@@ -24,60 +24,96 @@
             </form>
         </td>
     </tr>
-    {{/each}}   
+    {{/each}}
 </table>
 
 <h2>Create a purchase item</h2>
-<form action="/purchaseitems/create" method="POST">
-    <label for="purchase_id">Purchase:</label>
-    <select name="purchase_id" id="purchase_id">
-        <option value="5001">#5001 &middot; Cascade Apparel Supply &middot; 2026-06-02</option>
-        <option value="5002">#5002 &middot; Pacific Garment Wholesale &middot; 2026-06-15</option>
-        <option value="5003">#5003 &middot; Northwest Outdoor Apparel &middot; 2026-07-01</option>
-    </select>
+<form action="/purchaseitems" method="POST" class="form-card">
+    <div class="field">
+        <label for="purchase_id">Purchase</label>
+        <select name="purchase_id" id="purchase_id">
+            {{#each purchases}}
+            <option value="{{this.purchase_id}}">#{{this.purchase_id}} &middot; {{this.distributor_name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="inventory_id">Inventory item:</label>
-    <select name="inventory_id" id="inventory_id">
-        <option value="101">JKT-204 &middot; Columbia Rain Jacket</option>
-        <option value="102">JNS-310 &middot; Levi's Jeans</option>
-        <option value="103">HDY-118 &middot; Carhartt Hoodie</option>
-        <option value="104">BNE-055 &middot; Patagonia Beanie</option>
-    </select>
+    <div class="field">
+        <label for="inventory_id">Inventory item</label>
+        <select name="inventory_id" id="inventory_id">
+            {{#each inventory}}
+            <option value="{{this.inventory_id}}">{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="quantity_purchased">Quantity purchased:</label>
-    <input type="number" name="quantity_purchased" id="quantity_purchased" min="1">
+    <div class="field">
+        <label for="quantity_purchased">Quantity purchased</label>
+        <input type="number" name="quantity_purchased" id="quantity_purchased" min="1">
+    </div>
 
-    <label for="price_paid">Price paid:</label>
-    <input type="number" name="price_paid" id="price_paid" step="0.01" min="0">
+    <div class="field">
+        <label for="price_paid">Price paid</label>
+        <input type="number" name="price_paid" id="price_paid" step="0.01" min="0">
+    </div>
 
     <input type="submit" value="Submit">
 </form>
 
 <h2>Update a purchase item</h2>
-<form action="/purchaseitems/update" method="POST">
-    <label for="update_purchase_item_id">Purchase item to update:</label>
-    <select name="purchase_item_id" id="update_purchase_item_id">
-        <option value="">Select a purchase item</option>
-        <option value="9001">#9001 &middot; Purchase 5001 &middot; JKT-204</option>
-        <option value="9002">#9002 &middot; Purchase 5001 &middot; HDY-118</option>
-        <option value="9003">#9003 &middot; Purchase 5002 &middot; JNS-310</option>
-        <option value="9004">#9004 &middot; Purchase 5002 &middot; BNE-055</option>
-        <option value="9005">#9005 &middot; Purchase 5003 &middot; JKT-204</option>
-    </select>
+<form action="/purchaseitems" method="POST" class="form-card">
+    <div class="field">
+        <label for="update_purchase_item_id">Purchase item to update</label>
+        <select name="purchase_item_id" id="update_purchase_item_id">
+            <option value="">Select a purchase item</option>
+            {{#each purchaseitems}}
+            <option value="{{this.purchase_item_id}}">#{{this.purchase_item_id}} &middot; Purchase {{this.purchase_id}} &middot; {{this.sku}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_inventory_id">Inventory item:</label>
-    <select name="inventory_id" id="update_inventory_id">
-        <option value="101">JKT-204 &middot; Columbia Rain Jacket</option>
-        <option value="102">JNS-310 &middot; Levi's Jeans</option>
-        <option value="103">HDY-118 &middot; Carhartt Hoodie</option>
-        <option value="104">BNE-055 &middot; Patagonia Beanie</option>
-    </select>
+    <div class="field">
+        <label for="update_purchase_id">Purchase</label>
+        <select name="purchase_id" id="update_purchase_id">
+            {{#each purchases}}
+            <option value="{{this.purchase_id}}">#{{this.purchase_id}} &middot; {{this.distributor_name}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_quantity_purchased">Quantity purchased:</label>
-    <input type="number" name="quantity_purchased" id="update_quantity_purchased" min="1">
+    <div class="field">
+        <label for="update_inventory_id">Inventory item</label>
+        <select name="inventory_id" id="update_inventory_id">
+            {{#each inventory}}
+            <option value="{{this.inventory_id}}">{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-    <label for="update_price_paid">Price paid:</label>
-    <input type="number" name="price_paid" id="update_price_paid" step="0.01" min="0">
+    <div class="field">
+        <label for="update_quantity_purchased">Quantity purchased</label>
+        <input type="number" name="quantity_purchased" id="update_quantity_purchased" min="1">
+    </div>
+
+    <div class="field">
+        <label for="update_price_paid">Price paid</label>
+        <input type="number" name="price_paid" id="update_price_paid" step="0.01" min="0">
+    </div>
 
     <input type="submit" value="Submit">
 </form>
+
+<script>
+    const purchaseItemRecords = {{{json purchaseitems}}};
+
+    document.getElementById('update_purchase_item_id').addEventListener('change', function () {
+        const record = purchaseItemRecords.find(p => String(p.purchase_item_id) === this.value);
+        const fields = [
+            'purchase_id', 'inventory_id',
+            'quantity_purchased', 'price_paid'
+        ];
+        fields.forEach(function (field) {
+            document.getElementById('update_' + field).value = record ? (record[field] ?? '') : '';
+        });
+    });
+</script>
