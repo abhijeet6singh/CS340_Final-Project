@@ -6,6 +6,12 @@
 -- This file creates the tables for the Peak Apparel Co. database.
 -- The tables are dropped first so the script can be rerun during testing.
 
+-- Citation for the following code:
+-- Date: 08/08/26
+-- Source URL: https://chatgpt.com/
+-- If AI tools were used: Used AI for troubleshooting SQL errors, checking table order, and getting guidance on foreign key issues.
+
+
 DROP PROCEDURE IF EXISTS sp_load_peakapparel;
 
 DELIMITER //

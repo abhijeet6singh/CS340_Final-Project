@@ -1,3 +1,10 @@
+/*
+Citation for the following code:
+Date: 08/06/26
+Source URL: https://chatgpt.com/
+If AI tools were used: Used AI for troubleshooting route errors, checking form action matches, and getting debugging guidance.
+*/
+
 const db = require('./database/db-connector');
 const express = require('express');
 const { engine } = require('express-handlebars');
