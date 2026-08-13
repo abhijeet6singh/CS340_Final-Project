@@ -100,9 +100,19 @@
     </div>
 
     <div class="field">
+        <label for="update_order_id">Order</label>
+        <select name="order_id" id="update_order_id">
+            <option value="">Select an order</option>
+            {{#each orders}}
+            <option value="{{this.order_id}}">#{{this.order_id}} &middot; {{this.customer_first_name}} {{this.customer_last_name}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div class="field">
         <label for="update_inventory_id">Inventory item</label>
         <select name="inventory_id" id="update_inventory_id">
-            <option value=""></option>
+            <option value="">Select an inventory item</option>
             {{#each inventory}}
             <option value="{{this.inventory_id}}">{{this.sku}} &middot; {{this.brand_name}} {{this.inventory_type}}</option>
             {{/each}}
@@ -146,15 +156,24 @@
 
     document.getElementById('update_order_item_id').addEventListener('change', function () {
         const record = orderItemRecords.find(o => String(o.order_item_id) === this.value);
+
         const fields = [
-            'inventory_id', 'quantity', 'discount_percent',
-            'selling_price', 'shipped', 'shipping_date'
+            'order_id',
+            'inventory_id',
+            'quantity',
+            'discount_percent',
+            'selling_price',
+            'shipped',
+            'shipping_date'
         ];
+
         fields.forEach(function (field) {
             let value = record ? (record[field] ?? '') : '';
+
             if (field === 'shipping_date' && value) {
                 value = String(value).slice(0, 10);
             }
+
             document.getElementById('update_' + field).value = value;
         });
     });
