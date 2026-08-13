@@ -5,7 +5,6 @@
 
 -- This file creates the tables for the Peak Apparel Co. database.
 -- The tables are dropped first so the script can be rerun during testing.
--- Foreign key checks are turned off temporarily because some tables depend on others.
 
 DROP PROCEDURE IF EXISTS sp_load_peakapparel;
 

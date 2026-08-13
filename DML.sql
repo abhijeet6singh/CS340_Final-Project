@@ -376,7 +376,7 @@ CALL sp_create_orderitem(
     @shippingDate
 );
 
--- Update an OrderItems row. Changing inventory_id updates the M:N relationship.
+-- Update an OrderItems row.
 CALL sp_update_orderitem(
     @orderItemID,
     @inventoryID,

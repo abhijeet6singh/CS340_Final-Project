@@ -178,7 +178,7 @@ DROP PROCEDURE IF EXISTS sp_delete_orderitem;
 DELIMITER //
 
 CREATE PROCEDURE sp_delete_orderitem(IN p_order_item_id INT)
-COMMENT 'Deletes one OrderItems row from the Orders-Inventory M:N relationship.'
+COMMENT 'Deletes one OrderItems row'
 BEGIN
     DELETE FROM OrderItems
     WHERE order_item_id = p_order_item_id;
