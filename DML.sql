@@ -5,6 +5,10 @@
 
 -- This file has the SQL queries that will be used later by the website.
 
+-- Citation for the following code:
+-- Date: 08/09/26
+-- Source URL: https://chatgpt.com/
+-- If AI tools were used: Used AI for troubleshooting query issues and checking that procedure calls matched the website actions.
 
 -- -----------------------------------------------------
 -- Customers

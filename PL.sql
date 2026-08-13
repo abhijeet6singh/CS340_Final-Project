@@ -6,6 +6,11 @@
 -- This file contains procedures all CUD Operations.
 -- It contains procedures like "CREATE" "UPDATE" and "DELETE".
 
+-- Citation for the following code:
+-- Date: 08/12/26
+-- Source URL: https://chatgpt.com/
+-- If AI tools were used: Used AI for troubleshooting stored procedure errors and checking that procedure parameters matched the routes.
+
 -- ============================================================
 -- CREATE Inventory
 -- ============================================================
