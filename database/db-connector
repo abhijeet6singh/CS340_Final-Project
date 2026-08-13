@@ -1,0 +1,12 @@
+let mysql = require('mysql2');
+
+const pool = mysql.createPool({
+    waitForConnections: true,
+    connectionLimit: 10,
+    host: 'classmysql.engr.oregonstate.edu',
+    user: 'cs340_YOUR_ONID',
+    password: 'YOUR_DB_PASSWORD',
+    database: 'cs340_YOUR_ONID'
+}).promise();
+
+module.exports = pool;
