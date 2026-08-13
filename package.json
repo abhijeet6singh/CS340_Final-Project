@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-"scripts": {
-  "start": "node app.js",
-  "production": "forever start app.js",
-  "stop_production": "forever stop app.js"
-},
+  "scripts": {
+    "start": "node app.js",
+    "production": "forever start app.js",
+    "stop_production": "forever stop app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abhijeet6singh/CS340_Final-Project.git"
@@ -22,6 +22,7 @@
   "dependencies": {
     "express": "^4.22.2",
     "express-handlebars": "^6.0.7",
+    "forever": "^4.0.3",
     "mysql2": "^3.23.2"
   }
 }
