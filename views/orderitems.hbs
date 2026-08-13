@@ -100,16 +100,6 @@
     </div>
 
     <div class="field">
-        <label for="update_order_id">Order</label>
-        <select name="order_id" id="update_order_id">
-            <option value="">Select an order</option>
-            {{#each orders}}
-            <option value="{{this.order_id}}">#{{this.order_id}} &middot; {{this.customer_first_name}} {{this.customer_last_name}}</option>
-            {{/each}}
-        </select>
-    </div>
-
-    <div class="field">
         <label for="update_inventory_id">Inventory item</label>
         <select name="inventory_id" id="update_inventory_id">
             <option value="">Select an inventory item</option>
@@ -158,7 +148,6 @@
         const record = orderItemRecords.find(o => String(o.order_item_id) === this.value);
 
         const fields = [
-            'order_id',
             'inventory_id',
             'quantity',
             'discount_percent',
